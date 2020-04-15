@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarText
-} from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+
+import CookieUtil from '../util/cookie';
 
 const NavbarComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory()
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const logout = () => {
+    CookieUtil.remove();
+    history.replace("/login")
+  }
 
   return (
     <div>
@@ -53,7 +52,7 @@ const NavbarComponent = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown> */}
           </Nav>
-          <NavbarText>Username</NavbarText>
+          <NavLink tag={Link} to="#" onClick={logout}>Logout</NavLink>
         </Collapse>
       </Navbar>
     </div>

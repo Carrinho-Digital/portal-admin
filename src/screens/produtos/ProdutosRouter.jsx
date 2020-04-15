@@ -1,6 +1,7 @@
-import React from 'react'
-import { useRouteMatch, Switch, Route } from 'react-router-dom'
-import Produtos from './Produtos'
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+
+import Produtos from './Produtos';
 
 export default () => {
     const match = useRouteMatch()
