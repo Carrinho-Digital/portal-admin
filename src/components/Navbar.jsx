@@ -15,9 +15,7 @@ const NavbarComponent = (props) => {
     history.replace("/login")
   }
 
-  return (
-    <div>
-      <Navbar fixed="top" color="white" light expand="md">
+  return <Navbar className="shadow-sm" fixed="top" color="white" light expand="md">
         <NavbarBrand href="/">Carrinho digital</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -55,8 +53,6 @@ const NavbarComponent = (props) => {
           <NavLink tag={Link} to="#" onClick={logout}>Logout</NavLink>
         </Collapse>
       </Navbar>
-    </div>
-  );
 }
 
 export default NavbarComponent;

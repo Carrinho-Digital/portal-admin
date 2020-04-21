@@ -10,29 +10,29 @@ import Vendas from '../screens/vendas/Vendas';
 
 export default function App() {
   return <>
-      <header className="mb-5">
-        <Navbar />
-      </header>
-      <main className="flex-shrink-0" role="main">
-        <Switch>
-          <PrivateRoute path="/vendas">
-            <Vendas />
-          </PrivateRoute>
-          <PrivateRoute path="/produtos">
-            <ProdutosRouter />
-          </PrivateRoute>
-          <PrivateRoute path="/">
-            <Home />
-          </PrivateRoute>
-        </Switch>
-      </main>
-      <footer className="footer mt-auto py-2">
-        <Container className="d-flex">
-          <Row className="justify-content-center">
-            © Carrinho Digital - Todos os direitos reservados
+    <header style={{ marginBottom: "65px" }}>
+      <Navbar />
+    </header>
+    <main className="flex-shrink-0" role="main">
+      <Switch>
+        <PrivateRoute path="/vendas">
+          <Vendas />
+        </PrivateRoute>
+        <PrivateRoute path="/produtos">
+          <ProdutosRouter />
+        </PrivateRoute>
+        <PrivateRoute path="/">
+          <Home />
+        </PrivateRoute>
+      </Switch>
+    </main>
+    <footer className="footer mt-auto py-2">
+      <Container className="d-flex">
+        <Row className="justify-content-center">
+          © Carrinho Digital - Todos os direitos reservados
           </Row>
-        </Container>
-      </footer>
+      </Container>
+    </footer>
   </>
 }
 
