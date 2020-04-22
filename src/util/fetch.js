@@ -1,5 +1,3 @@
-import { EOL } from 'os';
-
 import CookieManager from './cookie';
 
 export class FetchUtil {
@@ -9,11 +7,11 @@ export class FetchUtil {
     headers = new Headers();
 
     getRequestAtual(url, method, body) {
-        if (this.authorized && !this.headers.get("Authorization")) {
-            this.headers.append("Authorization", CookieManager.get("Authorization"));
+        if (this.authorized && !this.headers.has("Authorization")) {
+            this.headers.set("Authorization", `Bearer ${CookieManager.get("Authorization")}`);
         }
-        if (!this.headers.get("Content-Type")) {
-            this.headers.append("Content-Type", 'application/json');
+        if (!this.headers.has("Content-Type")) {
+            this.headers.set("Content-Type", 'application/json');
         }
 
         const headers = this.headers;
@@ -38,6 +36,10 @@ export class FetchUtil {
             alert("Não autorizado!");
             CookieManager.remove("Authorization");
             window.location.href = '/login'
+        }
+
+        if (response.status === 500) {
+            alert("Ocorreu um erro interno no servidor!")
         }
     }
 
@@ -65,49 +67,7 @@ export class FetchUtil {
         return response;
     }
 
-    static async tratarBodyResponse(response, body) {
-        debugger
-        let mensagemErro = null;
-
-        switch (response.status) {
-            case 400:
-                if (!body) {
-                    alert("Ocorreu um erro!")
-                    return;
-                }
-
-                const { errors, message } = body;
-
-                if (errors) {
-                    const keys = Object.keys(errors);
-
-                    mensagemErro = (keys || []).map(key => {
-                        const prop = body[key];
-
-                        if (!prop) return undefined
-
-                        return prop.message;
-                    }).join(EOL);
-                } else {
-                    if (message) {
-                        mensagemErro = message;
-                    }
-                }
-                break;
-            case 404:
-                mensagemErro = "Erro 404, recurso não encontrado!";
-                break;
-            case 500:
-                mensagemErro = "Ocorreu um erro interno no servidor!"
-                break
-            default:
-                if (body && body.message) {
-                    mensagemErro = body.message;
-                }
-        }
-
-        if (mensagemErro) {
-            alert(mensagemErro);
-        }
+    if(mensagemErro) {
+        alert(mensagemErro);
     }
 }

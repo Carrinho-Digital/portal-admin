@@ -4,9 +4,10 @@ import thunk from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 
 import conta from './conta/reducers'
+import produtos from './produtos/reducers'
 
 const reducers = combineReducers({
-    // vendas, produtos, home, 
+    produtos,
     conta,
     form: formReducer
 })
