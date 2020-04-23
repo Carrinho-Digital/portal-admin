@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Row, Button, Col, Table } from 'reactstrap';
+import React, { useState } from 'react';
+import { Container, Row, Button, Col, Table, PaginationLink, PaginationItem, Pagination } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,13 +7,14 @@ import { fetchProdutos, deleteProduto } from '../../store/produtos/actions';
 
 export default () => {
     const dispatch = useDispatch()
-    const produtosResponse = useSelector(state => state.produtos.response)
+    const { data, currentPage, totalPages } = useSelector(state => state.produtos.response)
+    const [limit, setLimit] = useState(5)
 
     React.useEffect(() => {
         dispatch(fetchProdutos())
     }, [])
 
-    const renderProdutos = () => produtosResponse.data.map((produto) => (
+    const renderProdutos = () => data.map((produto) => (
         <tr key={`produto-${produto._id}`}>
             <td>{produto.name}</td>
             <td>{produto.amount}</td>
@@ -36,6 +37,17 @@ export default () => {
         </tr>
     ))
 
+    const paginate = page => dispatch(fetchProdutos(page))
+
+
+    const renderPaginationItems = () => {
+        const items = new Array(totalPages).fill(0)
+
+        return items.map((_, index) => <PaginationItem active={currentPage === index} key={`pagination-item-${index}`}>
+            <PaginationLink onClick={() => paginate(index)} to="#">{index + 1}</PaginationLink>
+        </PaginationItem >)
+    }
+
     return <>
         <Container>
             <Row>
@@ -52,7 +64,7 @@ export default () => {
             </Row>
             <Row>
                 <Col>
-                    <Table>
+                    <Table size="sm">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -65,6 +77,25 @@ export default () => {
                             {renderProdutos()}
                         </tbody>
                     </Table>
+                </Col>
+            </Row>
+            <Row>
+                <Col className="d-flex justify-content-center">
+                    <Pagination>
+                        <PaginationItem>
+                            <PaginationLink first onClick={() => paginate(1)} to="#" />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink previous onClick={() => paginate(currentPage - 1)} to="#" />
+                        </PaginationItem>
+                        {renderPaginationItems()}
+                        <PaginationItem>
+                            <PaginationLink next onClick={() => paginate(currentPage + 1)} to="#" />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink last onClick={() => paginate(totalPages)} to="#" />
+                        </PaginationItem>
+                    </Pagination>
                 </Col>
             </Row>
         </Container>

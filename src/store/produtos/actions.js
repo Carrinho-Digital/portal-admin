@@ -1,7 +1,7 @@
 import { FetchUtil } from "../../util/fetch"
 import CookieUtil from "../../util/cookie"
 
-export const fetchProdutos = () => async dispatch => {
+export const fetchProdutos = (page = 0, limit) => async dispatch => {
 
     const http = new FetchUtil()
 
@@ -14,7 +14,7 @@ export const fetchProdutos = () => async dispatch => {
 
     const { _id } = JSON.parse(userDataJson)
 
-    const response = await http.get(`api/v1/products/market/${_id}`)
+    const response = await http.get(`api/v1/products/market/${_id}?page=${page}&limit=${limit}`)
     const payload = await response.json()
 
     dispatch({
