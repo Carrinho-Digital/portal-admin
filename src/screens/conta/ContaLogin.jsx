@@ -10,7 +10,7 @@ const ContaLogin = () => {
     const history = useHistory()
 
     const handleSubmit = async e => {
-        debugger
+        
         await dispatch(login(e))
         history.push("/")
     }
