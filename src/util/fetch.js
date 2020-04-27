@@ -51,6 +51,14 @@ export class FetchUtil {
         return response;
     }
 
+    async patch(url, body) {
+        let response = await fetch(this.getRequestAtual(url, 'PATCH', body));
+
+        this.tratarResponse(response);
+
+        return response;
+    }
+
     async get(url) {
         let response = await fetch(this.getRequestAtual(url, 'GET'));
 

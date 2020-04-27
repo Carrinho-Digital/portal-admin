@@ -73,3 +73,13 @@ export const updateProduto = obj => async () => {
         alert("Requisição mal formada")
     }
 }
+
+export const changeInactive = (productId, inactive = false) => async () => {
+  const http = new FetchUtil()
+
+  const inactiveBody = {
+    inactive,
+  };
+
+  await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
+}
