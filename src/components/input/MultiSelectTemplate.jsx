@@ -27,7 +27,7 @@ export const renderMultiSelect = ({
     'is-valid': !error && touched,
     'is-invalid': error && touched,
   });
-  debugger
+  
   return (
     <FormGroup>
       <Label className={classNames({ 'd-none': hidden })} for={input.name}>{label} {required && !dotNotShowRequiredChar && <strong className="text-danger">*</strong>}</Label>
