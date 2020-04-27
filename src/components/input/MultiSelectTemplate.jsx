@@ -27,7 +27,7 @@ export const renderMultiSelect = ({
     'is-valid': !error && touched,
     'is-invalid': error && touched,
   });
-  
+  debugger
   return (
     <FormGroup>
       <Label className={classNames({ 'd-none': hidden })} for={input.name}>{label} {required && !dotNotShowRequiredChar && <strong className="text-danger">*</strong>}</Label>
@@ -42,7 +42,11 @@ export const renderMultiSelect = ({
         className={classes}
         id={input.name}
         name={input.name}
-        required={required} hidden={hidden}
+        value={input.value}
+        required={required} 
+        onBlur={e => {
+          //Nada acontece aqui, para que o valor não seja resetado
+        }}
       />
       {error && touched && !hidden && <FormFeedback valid={false}>{error}</FormFeedback>}
     </FormGroup>
