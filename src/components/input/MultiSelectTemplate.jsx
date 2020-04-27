@@ -42,7 +42,11 @@ export const renderMultiSelect = ({
         className={classes}
         id={input.name}
         name={input.name}
-        required={required} hidden={hidden}
+        value={input.value}
+        required={required} 
+        onBlur={e => {
+          //Nada acontece aqui, para que o valor não seja resetado
+        }}
       />
       {error && touched && !hidden && <FormFeedback valid={false}>{error}</FormFeedback>}
     </FormGroup>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import { Col, Container, Row } from 'reactstrap';
+import { useHistory, useParams, Link } from 'react-router-dom';
+import { Col, Container, Row, BreadcrumbItem, Breadcrumb, Card, CardBody } from 'reactstrap';
 
 import { getProdutoById, updateProduto } from '../../store/produtos/actions';
 import ProdutoForm from './ProdutoForm';
@@ -20,7 +20,7 @@ const ProdutoAlterar = () => {
         await dispatch(updateProduto(e))
         history.push("/produtos")
     }
-    debugger
+
     if (!produtoAtual) {
         return <Container>
             <Row>
@@ -31,7 +31,27 @@ const ProdutoAlterar = () => {
         </Container>
     }
 
-    return <ProdutoForm initialValues={produtoAtual} onSubmit={handleSubmit} />
+    return <Container>
+        <Row>
+            <Col xl="12">
+                <Breadcrumb>
+                    <BreadcrumbItem tag={Link} to="/produtos">
+                        Produtos
+                    </BreadcrumbItem>
+                    <BreadcrumbItem>
+                        Alterar
+                    </BreadcrumbItem>
+                </Breadcrumb>
+            </Col>
+        </Row>
+        <Card>
+            <CardBody>
+                <ProdutoForm initialValues={produtoAtual} onSubmit={handleSubmit} />
+            </CardBody>
+        </Card>
+
+    </Container>
+    return
 }
 
 export default ProdutoAlterar

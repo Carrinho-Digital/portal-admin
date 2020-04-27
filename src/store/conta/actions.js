@@ -20,16 +20,4 @@ export const login = user => async () => {
     }
 
     CookieUtil.set("Authorization", payload.token, 3.5)
-
-    http = new FetchUtil()
-    http.authorized = true;
-    const responseUserData = await http.get('api/v1/users/current')
-
-    if(!responseUserData.ok){
-        return
-    }
-
-    const responseUserDataJson = await responseUserData.json()
-
-    CookieUtil.set("UserData", JSON.stringify(responseUserDataJson.data), 3.5)
 }

@@ -1,20 +1,10 @@
 import { FetchUtil } from "../../util/fetch"
-import CookieUtil from "../../util/cookie"
 
-export const fetchProdutos = () => async dispatch => {
-
+export const fetchProdutos = (query) => async dispatch => {
+    
     const http = new FetchUtil()
 
-    const userDataJson = CookieUtil.get("UserData");
-
-    if (!userDataJson) {
-        alert("Erro ao buscar produtos!")
-        return
-    }
-
-    const { _id } = JSON.parse(userDataJson)
-
-    const response = await http.get(`api/v1/products/market/${_id}`)
+    const response = await http.get(`api/v1/products?${query}`)
     const payload = await response.json()
 
     dispatch({
@@ -24,7 +14,7 @@ export const fetchProdutos = () => async dispatch => {
 }
 
 export const getProdutoById = _id => async dispatch => {
-    debugger
+    
     const http = new FetchUtil()
 
     const response = await http.get(`api/v1/products/${_id}`)
