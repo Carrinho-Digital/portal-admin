@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useRouteMatch } from 'react-router-dom'
 import {
@@ -15,7 +15,11 @@ import {
   Breadcrumb,
 } from 'reactstrap'
 
-import { deleteProduto, fetchProdutos } from '../../store/produtos/actions'
+import {
+  deleteProduto,
+  fetchProdutos,
+  changeInactive,
+} from '../../store/produtos/actions'
 
 export default () => {
   const dispatch = useDispatch()
@@ -38,16 +42,27 @@ export default () => {
 
   const renderProdutos = () =>
     data.map((produto) => (
-      <tr key={`produto-${produto._id}`}>
+      <tr
+        className={produto.inactive ? 'bg-secondary' : ''}
+        key={`produto-${produto._id}`}
+      >
         <th scope="row">{produto.name}</th>
         <td>{produto.amount}</td>
         <td>{produto.unit ? produto.unit.toUpperCase() : '--'}</td>
         <td align="right">R$ {Number(produto.sellPrice).toFixed(2)}</td>
         <td align="center">
-          <input type="checkbox" value={produto.inactive} />
+          <input
+            type="checkbox"
+            checked={produto.inactive}
+            onChange={async ({ target }) => {
+              await dispatch(changeInactive(produto._id, !produto.inactive))
+              updateFilter()
+            }}
+          />
         </td>
         <td className="d-flex justify-content-end">
           <Button
+            disabled={produto.inactive}
             className="mr-2"
             outline
             color="warning"
@@ -59,6 +74,7 @@ export default () => {
 
           <Button
             outline
+            disabled={produto.inactive}
             color="danger"
             tag={Link}
             onClick={async () => {
