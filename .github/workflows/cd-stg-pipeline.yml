@@ -29,7 +29,7 @@ jobs:
       - name: Create app.yaml
         run: |
           cat > ./app.yaml <<EOF
-          runtime: nodejs
+          runtime: nodejs10
           env_variables:
             REACT_APP_API_URL: https://api.carrinhodigital.co
             NODE_ENV: ${{ env.NODE_ENV }}
