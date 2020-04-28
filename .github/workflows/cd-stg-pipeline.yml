@@ -41,6 +41,7 @@ jobs:
           env: flex
           env_variables:
             NODE_ENV: ${{ env.NODE_ENV }}
+            REACT_APP_API_URL=https://api.carrinhodigital.co
           handlers:
             - url: /
               static_files: build/index.html
