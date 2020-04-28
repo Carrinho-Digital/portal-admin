@@ -30,6 +30,7 @@ jobs:
         run: |
           cat > ./app.yaml <<EOF
           runtime: nodejs10
+          env: flex
           env_variables:
             REACT_APP_API_URL: https://api.carrinhodigital.co
             NODE_ENV: ${{ env.NODE_ENV }}
