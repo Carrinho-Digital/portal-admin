@@ -30,14 +30,14 @@ jobs:
         run: |
           npm install --production
 
-      - name: Create Build
-        run: |
-          npm run build
-
       - name: Create app.yaml
         run: |
           echo "REACT_APP_API_URL=https://api.carrinhodigital.co" > ./build/.env
           echo "NODE_ENV=${{ env.NODE_ENV }}" > ./build/.env
+
+      - name: Create Build
+        run: |
+          npm run build
 
       # - name: Setup GCP
       #   uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
