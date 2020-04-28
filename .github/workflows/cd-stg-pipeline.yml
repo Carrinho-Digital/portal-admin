@@ -26,24 +26,19 @@ jobs:
         with:
           node-version: 10.x
 
+      - name: Install Packages
+        run: |
+          npm install --production
+
+      - name: Create Build
+        run: |
+          npm run build
+
       - name: Create app.yaml
         run: |
-          cat > ./app.yaml <<EOF
-          runtime: nodejs10
-          env: flex
-          env_variables:
-            REACT_APP_API_URL: https://api.carrinhodigital.co
-            NODE_ENV: ${{ env.NODE_ENV }}
-          handlers:
-            - url: /
-              static_files: build/index.html
-              upload: build/index.html
-              secure: always
-
-            - url: /(.*)
-              static_files: build/\1
-              upload: build/(.*)
-              secure: always
+          cat > ./build/.env <<EOF
+          NODE_ENV=${{ env.NODE_ENV }}
+          REACT_APP_API_URL=https://api.carrinhodigital.co
           EOF
 
       - name: Setup GCP
@@ -54,6 +49,9 @@ jobs:
           service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
           project_id: ${{ env.PROJECT_ID }}
 
-      - name: Deploy to App Engine
-        run: |
-          gcloud app deploy
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
