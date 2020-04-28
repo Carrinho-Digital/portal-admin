@@ -118,79 +118,75 @@ export default () => {
     ))
   }
 
-  return (
-    <>
-      <Container>
-        <Row className="mb-2">
-          <Col xl="12">
-            <Breadcrumb>
-              <BreadcrumbItem>Produtos</BreadcrumbItem>
-            </Breadcrumb>
-          </Col>
-          <Col xl="12">
-            <div className="d-flex align-self-center justify-content-end">
-              <Button outline color="success" tag={Link} to="/produtos/novo">
-                Novo produto <FontAwesomeIcon icon="plus" />
-              </Button>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Table striped bordered size="sm">
-              <thead class="thead-light">
-                <tr>
-                  <th>Nome</th>
-                  <th>Quantidade</th>
-                  <th>Unidade</th>
-                  <th className="text-right">$ Venda</th>
-                  <th className="text-center">Inativo</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>{renderProdutos()}</tbody>
-            </Table>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="d-flex justify-content-center">
-            <Pagination>
-              <PaginationItem>
-                <PaginationLink
-                  disabled={currentPage <= 0}
-                  first
-                  onClick={() => paginate(0)}
-                  to="#"
-                />
-              </PaginationItem>
-              <PaginationItem disabled={currentPage <= 0}>
-                <PaginationLink
-                  previous
-                  onClick={() => paginate(currentPage - 1)}
-                  to="#"
-                />
-              </PaginationItem>
-              {renderPaginationItems()}
-              <PaginationItem>
-                <PaginationLink
-                  disabled={currentPage >= totalPages - 1}
-                  next
-                  onClick={() => paginate(currentPage + 1)}
-                  to="#"
-                />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink
-                  disabled={currentPage >= totalPages - 1}
-                  last
-                  onClick={() => paginate(totalPages - 1)}
-                  to="#"
-                />
-              </PaginationItem>
-            </Pagination>
-          </Col>
-        </Row>
-      </Container>
-    </>
-  )
+  return <Container>
+    <Row className="mb-2">
+      <Col xl="12">
+        <Breadcrumb>
+          <BreadcrumbItem>Produtos</BreadcrumbItem>
+        </Breadcrumb>
+      </Col>
+      <Col xl="12">
+        <div className="d-flex align-self-center justify-content-end">
+          <Button outline color="success" tag={Link} to="/produtos/novo">
+            Novo produto <FontAwesomeIcon icon="plus" />
+          </Button>
+        </div>
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+        <Table striped bordered size="sm">
+          <thead className="thead-light">
+            <tr>
+              <th>Nome</th>
+              <th>Quantidade</th>
+              <th>Unidade</th>
+              <th className="text-right">$ Venda</th>
+              <th className="text-center">Inativo</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>{renderProdutos()}</tbody>
+        </Table>
+      </Col>
+    </Row>
+    <Row>
+      <Col className="d-flex justify-content-center">
+        <Pagination>
+          <PaginationItem>
+            <PaginationLink
+              disabled={currentPage <= 0}
+              first
+              onClick={() => paginate(0)}
+              to="#"
+            />
+          </PaginationItem>
+          <PaginationItem disabled={currentPage <= 0}>
+            <PaginationLink
+              previous
+              onClick={() => paginate(currentPage - 1)}
+              to="#"
+            />
+          </PaginationItem>
+          {renderPaginationItems()}
+          <PaginationItem>
+            <PaginationLink
+              disabled={currentPage >= totalPages - 1}
+              next
+              onClick={() => paginate(currentPage + 1)}
+              to="#"
+            />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
+              disabled={currentPage >= totalPages - 1}
+              last
+              onClick={() => paginate(totalPages - 1)}
+              to="#"
+            />
+          </PaginationItem>
+        </Pagination>
+      </Col>
+    </Row>
+  </Container>
 }
