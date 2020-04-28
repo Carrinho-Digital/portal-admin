@@ -45,15 +45,7 @@ jobs:
               secure: always
           EOF
 
-      - name: Set
-
-      - name: Install Packages
-        run: |
-          npm install --production
-
-      - name: Create Build
-        run: |
-          npm run buildup GCP
+      - name: Setup GCP
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: "286.0.0"
