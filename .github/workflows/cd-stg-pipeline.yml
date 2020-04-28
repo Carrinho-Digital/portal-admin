@@ -32,13 +32,14 @@ jobs:
 
       - name: Create .env file
         run: |
-          touch ./.env
-          echo "REACT_APP_API_URL=https://api.carrinhodigital.co" > ./.env
-          echo "NODE_ENV=${{ env.NODE_ENV }}" > ./.env
+          cat > ./.env <<EOF
+          REACT_APP_API_URL=https://api.carrinhodigital.co
+          EOF
 
       - name: Create Build
         run: |
           npm run build
+          rm -rf ./.env
 
       # - name: Setup GCP
       #   uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
