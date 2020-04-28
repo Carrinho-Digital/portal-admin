@@ -36,10 +36,8 @@ jobs:
 
       - name: Create app.yaml
         run: |
-          cat <<"EOF" > ./build/.env
-          REACT_APP_API_URL=https://api.carrinhodigital.co
-          NODE_ENV=${{ env.NODE_ENV }}
-          EOF
+          echo "REACT_APP_API_URL=https://api.carrinhodigital.co" > ./build/.env
+          echo "NODE_ENV=${{ env.NODE_ENV }}" > ./build/.env
 
       # - name: Setup GCP
       #   uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
