@@ -32,7 +32,7 @@ jobs:
 
       - name: Creating env vars file
         run: |
-          expose REACT_APP_API_URL=https://api.carrinhodigital.co
+          export REACT_APP_API_URL=https://api.carrinhodigital.co
 
       - name: Create Build
         run: |
