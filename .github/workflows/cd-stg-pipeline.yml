@@ -26,20 +26,12 @@ jobs:
         with:
           node-version: 10.x
 
-      - name: Install Packages
-        run: |
-          npm install --production
-
-      - name: Create Build
-        run: |
-          npm run build
-
       - name: Create app.yaml
         run: |
           cat > ./app.yaml <<EOF
           runtime: nodejs
-          env: flex
           env_variables:
+            REACT_APP_API_URL: https://api.carrinhodigital.co
             NODE_ENV: ${{ env.NODE_ENV }}
           handlers:
             - url: /
@@ -53,12 +45,15 @@ jobs:
               secure: always
           EOF
 
-          cat > ./build/.env <<EOF
-          REACT_APP_API_URL: https://api.carrinhodigital.co
-          NODE_ENV: ${{ env.NODE_ENV }}
-          EOF
+      - name: Set
 
-      - name: Setup GCP
+      - name: Install Packages
+        run: |
+          npm install --production
+
+      - name: Create Build
+        run: |
+          npm run buildup GCP
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: "286.0.0"
