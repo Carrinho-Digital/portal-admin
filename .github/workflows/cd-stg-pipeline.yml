@@ -65,4 +65,4 @@ jobs:
         with:
           args: deploy --only hosting
         env:
-          GCP_SA_KEY: ${{ steps.gcp_key.outpus.base_key }}
+          GCP_SA_KEY: ${{ steps.gcp_key.outputs.base_key }}
