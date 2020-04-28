@@ -18,6 +18,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Parse GCP Key to Base 64
+        id: gcp_key
+        run: |
+          cat > ./gcp_key <<EOF
+          ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+          EOF
+
+          echo "::set-output name=base_key::$(cat ./gcp_key | base64)"
+
+          rm -rf ./gcp_key
+
+      - name: Proof
+        run: |
+          echo ${{ steps.gcp_key.outputs.base_key }}
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -48,21 +63,6 @@ jobs:
       #     service_account_email: ${{ secrets.GCP_SA_EMAIL }}
       #     service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
       #     project_id: ${{ env.PROJECT_ID }}
-
-      - name: Parse GCP Key to Base 64
-        id: gcp_key
-        run: |
-          cat > ./gcp_key <<EOF
-          ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-          EOF
-
-          echo "::set-output name=base_key::$(cat ./gcp_key | base64)"
-
-          rm -rf ./gcp_key
-
-      - name: Proof
-        run: |
-          echo ${{ steps.gcp_key.outputs.base_key }}
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
