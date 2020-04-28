@@ -10,6 +10,7 @@ env:
   GCP_REGION: us-east1
   GCP_REGION_ZONE: us-east1-a
   NODE_ENV: production
+  CI: false
 
 jobs:
   setup-build-deploy:
