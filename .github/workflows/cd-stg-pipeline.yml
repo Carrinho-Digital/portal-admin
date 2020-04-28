@@ -18,21 +18,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Parse GCP Key to Base 64
-        id: gcp_key
-        run: |
-          cat > ./gcp_carrinhodigital_key.json <<EOF
-          ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-          EOF
-
-          echo "::set-output name=base_key::$(cat ./gcp_carrinhodigital_key.json | base64)"
-
-          rm -rf ./gcp_carrinhodigital_key.json
-
-      - name: Proof
-        run: |
-          echo ${{ steps.gcp_key.outputs.base_key }}
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -69,4 +54,4 @@ jobs:
         with:
           args: deploy --only hosting
         env:
-          GCP_SA_KEY: ${{ steps.gcp_key.outputs.base_key }}
+          GCP_SA_KEY: ${{ secrets.FIREBASE_TOKEN }}
