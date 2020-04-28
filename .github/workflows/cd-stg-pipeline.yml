@@ -41,15 +41,21 @@ jobs:
           env: flex
           env_variables:
             NODE_ENV: ${{ env.NODE_ENV }}
-            REACT_APP_API_URL: https://api.carrinhodigital.co
           handlers:
             - url: /
               static_files: build/index.html
               upload: build/index.html
+              secure: always
 
             - url: /(.*)
               static_files: build/\1
               upload: build/(.*)
+              secure: always
+          EOF
+
+          cat > ./build/.env <<EOF
+          REACT_APP_API_URL: https://api.carrinhodigital.co
+          NODE_ENV: ${{ env.NODE_ENV }}
           EOF
 
       - name: Setup GCP
