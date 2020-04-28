@@ -37,8 +37,8 @@ jobs:
       - name: Create app.yaml
         run: |
           cat <<"EOF" > ./build/.env
-          NODE_ENV=${{ env.NODE_ENV }} \
-          REACT_APP_API_URL=https://api.carrinhodigital.co \
+          REACT_APP_API_URL=https://api.carrinhodigital.co
+          NODE_ENV=${{ env.NODE_ENV }}
           EOF
 
       # - name: Setup GCP
