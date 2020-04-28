@@ -60,6 +60,10 @@ jobs:
 
           rm -rf ./gcp_key
 
+      - name: Proof
+        run: |
+          echo ${{ steps.gcp_key.outputs.base_key }}
+
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
