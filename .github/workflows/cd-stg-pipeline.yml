@@ -30,10 +30,11 @@ jobs:
         run: |
           npm install --production
 
-      - name: Create app.yaml
+      - name: Create .env file
         run: |
-          echo "REACT_APP_API_URL=https://api.carrinhodigital.co" > ./build/.env
-          echo "NODE_ENV=${{ env.NODE_ENV }}" > ./build/.env
+          touch ./.env
+          echo "REACT_APP_API_URL=https://api.carrinhodigital.co" > ./.env
+          echo "NODE_ENV=${{ env.NODE_ENV }}" > ./.env
 
       - name: Create Build
         run: |
