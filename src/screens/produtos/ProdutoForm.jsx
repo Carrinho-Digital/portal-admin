@@ -68,7 +68,6 @@ const ProdutoForm = props => {
                     }}
                     onCreate={name => {
                         dispatch(createTag(name))
-                        debugger
                         var tags = (currentValues && currentValues.tags) ? currentValues.tags : []
                         dispatch(change(FORM_NAME, 'tags', [...tags, name]))
                     }}
