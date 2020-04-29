@@ -1,0 +1,54 @@
+name: Deploy Portal Admin [STG]
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  PROJECT_ID: carrinhodigital
+  GCP_REGION: us-east1
+  GCP_REGION_ZONE: us-east1-a
+  NODE_ENV: production
+  CI: false
+
+jobs:
+  setup-build-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+
+      - name: Install Packages
+        run: |
+          npm install --production
+      - name: Create .env file
+        run: |
+          cat > ./.env <<EOF
+          REACT_APP_API_URL=https://api.carrinhodigital.co
+          EOF
+      - name: Create Build
+        run: |
+          npm run build
+          rm -rf ./.env
+      # - name: Setup GCP
+      #   uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      #   with:
+      #     version: "286.0.0"
+      #     service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+      #     service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+      #     project_id: ${{ env.PROJECT_ID }}
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
