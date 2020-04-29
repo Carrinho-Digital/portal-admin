@@ -1,7 +1,7 @@
 import { FetchUtil } from "../../util/fetch"
 
 export const fetchProdutos = (query) => async dispatch => {
-    
+
     const http = new FetchUtil()
 
     const response = await http.get(`api/v1/products?${query}`)
@@ -14,17 +14,19 @@ export const fetchProdutos = (query) => async dispatch => {
 }
 
 export const getProdutoById = _id => async dispatch => {
-    
+
     const http = new FetchUtil()
 
-    const response = await http.get(`api/v1/products/${_id}`)
+    const response = await http.get(`api/v1/products/market/${_id}`)
 
     if (!response.ok) {
         alert("Ocorreu um erro ao buscar o produto selecionado")
         return
     }
 
-    const payload = await response.json()
+    const { createdAt, updatedAt, __v, market, ...payload } = await response.json()
+
+
 
     dispatch({
         type: "@produtos/fetch_product",
@@ -75,11 +77,27 @@ export const updateProduto = obj => async () => {
 }
 
 export const changeInactive = (productId, inactive = false) => async () => {
-  const http = new FetchUtil()
+    const http = new FetchUtil()
 
-  const inactiveBody = {
-    inactive,
-  };
+    const inactiveBody = {
+        inactive,
+    };
 
-  await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
+    await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
 }
+
+export const searchTags = () => async dispatch => {
+    const http = new FetchUtil()
+
+    const response = await http.get(`api/v1/markets/tags`)
+
+    if (!response.ok) {
+        alert("Ocorreu um erro ao buscar as tags!")
+        return
+    }
+
+    const obj = await response.json()
+    return dispatch({ type: "@produtos/fetch_tags", payload: obj.data })
+}
+
+export const createTag = name => async dispatch => dispatch({ type: "@produtos/create_tag", payload: name })

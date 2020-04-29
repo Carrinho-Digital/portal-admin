@@ -30,7 +30,7 @@ const ProdutoNovo = () => {
         </Row>
         <Card>
             <CardBody>
-                <ProdutoForm onSubmit={handleSubmit} />
+                <ProdutoForm initialValues={{tags:[]}} onSubmit={handleSubmit} />
             </CardBody>
         </Card>
 

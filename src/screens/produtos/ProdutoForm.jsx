@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Button, Card, CardBody, Col, Container, Form, Row } from 'reactstrap';
-import { Field, reduxForm, change } from 'redux-form';
+import { Button, Col, Form, Row } from 'reactstrap';
+import { change, Field, reduxForm } from 'redux-form';
 
 import { getFieldMask, renderInput } from '../../components/input/InputTemplate';
 import { renderMultiSelect } from '../../components/input/MultiSelectTemplate';
-import validate from './validate';
-import { Multiselect } from 'react-widgets';
-import { useDispatch } from 'react-redux';
+import { searchTags, createTag } from '../../store/produtos/actions';
 
 const UnidadeMedidaOptions = () => {
     const unidades = ['kg', 'g', 'm', 'mm', 'cm', 'm2', 'm3', 'un']
@@ -28,6 +27,12 @@ const ProdutoForm = props => {
     const { handleSubmit } = props
     const history = useHistory();
     const dispatch = useDispatch();
+    const tags = useSelector(state => state.produtos.tags)
+    const { values: currentValues } = useSelector(state => state.form[FORM_NAME])
+
+    useEffect(() => {
+        dispatch(searchTags())
+    }, [])
 
     return <Form onSubmit={handleSubmit}>
         <Row>
@@ -50,26 +55,23 @@ const ProdutoForm = props => {
             </Col>
             <Col xl="6" sm="12">
                 <Field
+                    allowCreate="onFilter"
                     required
                     defaultValue={[]}
                     component={renderMultiSelect}
-                    data={['arroz', 'sabão', 'carne']}
+                    data={tags}
                     name="tags"
                     label="Tags"
                     placeholder="Ex: 5"
                     onBlur={e => {
                         dispatch(change(FORM_NAME, 'tags', e))
                     }}
+                    onCreate={name => {
+                        dispatch(createTag(name))
+                        var tags = (currentValues && currentValues.tags) ? currentValues.tags : []
+                        dispatch(change(FORM_NAME, 'tags', [...tags, name]))
+                    }}
                 />
-                {/* <div className="form-group">
-                                <label>Tags</label>
-                                <Field
-                                    name="tags"
-                                    component={Multiselect}
-                                    defaultValue={[]}
-                                    onBlur={() => props.onBlur()}
-                                    data={['arroz', 'sabão', 'carne']} />
-                            </div> */}
             </Col>
         </Row>
         <Row>
