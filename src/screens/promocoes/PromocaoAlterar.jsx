@@ -5,6 +5,7 @@ import { Col, Container, Row, BreadcrumbItem, Breadcrumb, Card, CardBody } from 
 
 import { getPromocaoById, updatePromocao } from '../../store/promocoes/actions';
 import PromocaoForm from './PromocaoForm';
+import { toDateTimeLocal, mapDate } from '../../util/date';
 
 const PromocaoAlterar = () => {
     const dispatch = useDispatch()
@@ -31,6 +32,13 @@ const PromocaoAlterar = () => {
         </Container>
     }
 
+    const { startDate, endDate, ...rest } = promocaoAtual
+    const payload = {
+        ...rest,
+        startDate: toDateTimeLocal(mapDate(startDate)),
+        endDate: toDateTimeLocal(mapDate(endDate))
+    }
+
     return <Container>
         <Row>
             <Col xl="12">
@@ -46,7 +54,7 @@ const PromocaoAlterar = () => {
         </Row>
         <Card>
             <CardBody>
-                <PromocaoForm initialValues={promocaoAtual} onSubmit={handleSubmit} />
+                <PromocaoForm initialValues={payload} onSubmit={handleSubmit} />
             </CardBody>
         </Card>
 

@@ -7,7 +7,7 @@ export const fetchProdutos = (query) => async dispatch => {
     const response = await http.get(`api/v1/products?${query}`)
     const payload = await response.json()
 
-    dispatch({
+    return dispatch({
         type: "@produtos/fetch",
         payload
     })
@@ -26,9 +26,7 @@ export const getProdutoById = _id => async dispatch => {
 
     const { createdAt, updatedAt, __v, market, ...payload } = await response.json()
 
-
-
-    dispatch({
+    return dispatch({
         type: "@produtos/fetch_product",
         payload
     })
@@ -36,7 +34,7 @@ export const getProdutoById = _id => async dispatch => {
 
 export const deleteProduto = id => async () => {
     const http = new FetchUtil()
-    await http.delete(`api/v1/products/${id}`)
+    return await http.delete(`api/v1/products/${id}`)
 }
 
 export const insertProduto = obj => async () => {
@@ -83,7 +81,7 @@ export const changeInactive = (productId, inactive = false) => async () => {
         inactive,
     };
 
-    await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
+    return await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
 }
 
 export const searchTags = () => async dispatch => {

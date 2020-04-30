@@ -13,7 +13,7 @@ export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case "@promocoes/fetch":
             return { ...state, response: action.payload }
-        case "@promocoes/fetch_product":            
+        case "@promocoes/fetch_promotion":            
             return { ...state, promocaoAtual: action.payload }
         case "@promocoes/fetch_tags":            
             return { ...state, tags: action.payload }

@@ -4,10 +4,10 @@ export const fetchPromocoes = (query) => async dispatch => {
 
     const http = new FetchUtil()
 
-    const response = await http.get(`api/v1/products?${query}`)
+    const response = await http.get(`api/v1/promotions?${query}`)
     const payload = await response.json()
 
-    dispatch({
+    return dispatch({
         type: "@promocoes/fetch",
         payload
     })
@@ -17,31 +17,36 @@ export const getPromocaoById = _id => async dispatch => {
 
     const http = new FetchUtil()
 
-    const response = await http.get(`api/v1/products/market/${_id}`)
+    const response = await http.get(`api/v1/promotions/${_id}`)
 
     if (!response.ok) {
-        alert("Ocorreu um erro ao buscar o promocao selecionado")
+        alert("Ocorreu um erro ao buscar a promoção selecionada")
         return
     }
 
-    const { createdAt, updatedAt, __v, market, ...payload } = await response.json()
+    const payload = await response.json()
 
-
-
-    dispatch({
-        type: "@promocoes/fetch_product",
+    return dispatch({
+        type: "@promocoes/fetch_promotion",
         payload
     })
 }
 
 export const deletePromocao = id => async () => {
     const http = new FetchUtil()
-    await http.delete(`api/v1/products/${id}`)
+    return await http.delete(`api/v1/promotions/${id}`)
 }
 
 export const insertPromocao = obj => async () => {
     const http = new FetchUtil()
-    const response = await http.post('api/v1/products/', obj)
+
+    var { startDate, endDate, ...payload } = obj
+
+    if (!payload.undefinedTime) {
+        payload = { ...payload, startDate, endDate }
+    }
+
+    const response = await http.post('api/v1/promotions/', payload)
 
     if (response.ok) {
         return
@@ -59,9 +64,13 @@ export const insertPromocao = obj => async () => {
 export const updatePromocao = obj => async () => {
     const http = new FetchUtil()
 
-    const { _id, market, ...payload } = obj
+    var { startDate, endDate, _id, product, createdAt, updatedAt, market, __v, discountInPrice, ...payload } = obj
 
-    const response = await http.put(`api/v1/products/${_id}`, payload)
+    if (!payload.undefinedTime) {
+        payload = { ...payload, startDate, endDate }
+    }
+
+    const response = await http.put(`api/v1/promotions/${_id}`, payload)
 
     if (response.ok) {
         return
@@ -74,16 +83,6 @@ export const updatePromocao = obj => async () => {
     if (response.status == 400) {
         alert("Requisição mal formada")
     }
-}
-
-export const changeInactive = (productId, inactive = false) => async () => {
-    const http = new FetchUtil()
-
-    const inactiveBody = {
-        inactive,
-    };
-
-    await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
 }
 
 export const searchTags = () => async dispatch => {

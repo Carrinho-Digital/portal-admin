@@ -13,6 +13,7 @@ import {
   Table,
   BreadcrumbItem,
   Breadcrumb,
+  Badge,
 } from 'reactstrap'
 
 import {
@@ -42,27 +43,14 @@ export default () => {
 
   const renderPromocoes = () =>
     data.map((promocao) => (
-      <tr
-        className={promocao.inactive ? 'bg-secondary' : ''}
-        key={`promocao-${promocao._id}`}
-      >
-        <th scope="row">{promocao.name}</th>
-        <td>{promocao.amount}</td>
-        <td>{promocao.unit ? promocao.unit.toUpperCase() : '--'}</td>
-        <td align="right">R$ {Number(promocao.sellPrice).toFixed(2)}</td>
-        <td align="center">
-          <input
-            type="checkbox"
-            checked={promocao.inactive}
-            onChange={async ({ target }) => {
-              await dispatch(changeInactive(promocao._id, !promocao.inactive))
-              updateFilter()
-            }}
-          />
-        </td>
+      <tr key={`promocao-${promocao._id}`}>
+        <th scope="row">{promocao.tags.map(tag => <Badge color="info" className="mx-1">{tag}</Badge>)}</th>
+        <td>{Number(promocao.discountInPercent).toFixed(2)} %</td>
+        <td>{promocao.undefinedTime ? 'Sim' : 'Não'}</td>
+        <td>{new Date(promocao.startDate).toLocaleDateString()} {new Date(promocao.startDate).toLocaleTimeString()}</td>
+        <td>{new Date(promocao.endDate).toLocaleDateString()} {new Date(promocao.endDate).toLocaleTimeString()}</td>
         <td className="d-flex justify-content-end">
           <Button
-            disabled={promocao.inactive}
             className="mr-2"
             outline
             color="warning"
@@ -71,10 +59,8 @@ export default () => {
           >
             <FontAwesomeIcon icon="pencil-alt" />
           </Button>
-
           <Button
             outline
-            disabled={promocao.inactive}
             color="danger"
             tag={Link}
             onClick={async () => {
@@ -122,13 +108,13 @@ export default () => {
     <Row className="mb-2">
       <Col xl="12">
         <Breadcrumb>
-          <BreadcrumbItem>Promocoes</BreadcrumbItem>
+          <BreadcrumbItem>Promoções</BreadcrumbItem>
         </Breadcrumb>
       </Col>
       <Col xl="12">
         <div className="d-flex align-self-center justify-content-end">
           <Button outline color="success" tag={Link} to="/promocoes/novo">
-            Novo promocao <FontAwesomeIcon icon="plus" />
+            Nova promoção <FontAwesomeIcon icon="plus" />
           </Button>
         </div>
       </Col>
@@ -138,11 +124,11 @@ export default () => {
         <Table striped bordered size="sm">
           <thead className="thead-light">
             <tr>
-              <th>Nome</th>
-              <th>Quantidade</th>
-              <th>Unidade</th>
-              <th className="text-right">$ Venda</th>
-              <th className="text-center">Inativo</th>
+              <th>Tags</th>
+              <th>Percentual</th>
+              <th>Tempo indefido?</th>
+              <th>Início</th>
+              <th>Final</th>
               <th />
             </tr>
           </thead>
