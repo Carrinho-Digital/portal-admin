@@ -6,7 +6,8 @@ const INITIAL_STATE = {
         totalPages: 0
     },
     promocaoAtual: null,
-    tags:[]
+    tags:[],
+    produtos:[]
 }
 
 export default function (state = INITIAL_STATE, action) {
@@ -17,6 +18,8 @@ export default function (state = INITIAL_STATE, action) {
             return { ...state, promocaoAtual: action.payload }
         case "@promocoes/fetch_tags":            
             return { ...state, tags: action.payload }
+        case "@promocoes/fetch_products":            
+            return { ...state, produtos: action.payload }
         case "@promocoes/create_tag":            
             return { ...state, tags: [...state.tags, action.payload] }
         default:

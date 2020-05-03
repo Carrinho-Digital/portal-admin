@@ -31,10 +31,13 @@ const PromocaoAlterar = () => {
             </Row>
         </Container>
     }
-
-    const { startDate, endDate, ...rest } = promocaoAtual
+    
+    const { startDate, endDate, product, ...rest } = promocaoAtual
     const payload = {
         ...rest,
+        productId: product,
+        promotionPerPrice: rest.discountInPrice > 0,
+        promotionPerProduct: product != null,
         startDate: toDateTimeLocal(mapDate(startDate)),
         endDate: toDateTimeLocal(mapDate(endDate))
     }

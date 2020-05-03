@@ -1,8 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory, useRouteMatch } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import {
+  Badge,
+  Breadcrumb,
+  BreadcrumbItem,
   Button,
   Col,
   Container,
@@ -11,24 +14,15 @@ import {
   PaginationLink,
   Row,
   Table,
-  BreadcrumbItem,
-  Breadcrumb,
-  Badge,
-} from 'reactstrap'
+} from 'reactstrap';
 
-import {
-  deletePromocao,
-  fetchPromocoes,
-  changeInactive,
-} from '../../store/promocoes/actions'
+import { deletePromocao, fetchPromocoes } from '../../store/promocoes/actions';
 
 export default () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const routeMatch = useRouteMatch()
-  const { data, currentPage, totalPages } = useSelector(
-    (state) => state.promocoes.response,
-  )
+  const { data, currentPage, totalPages } = useSelector((state) => state.promocoes.response)
 
   const getParams = () => {
     const { search } = history.location
@@ -41,11 +35,19 @@ export default () => {
 
   React.useEffect(updateFilter, [])
 
+  const getDesconto = promocao => {
+    if (promocao.discountInPercent) {
+      return `${Number(promocao.discountInPercent).toFixed(2)} %`
+    } else {
+      return `${Number(promocao.discountInPrice).toFixed(2)} R$`
+    }
+  }
+
   const renderPromocoes = () =>
     data.map((promocao) => (
       <tr key={`promocao-${promocao._id}`}>
-        <th scope="row">{promocao.tags.map(tag => <Badge color="info" className="mx-1">{tag}</Badge>)}</th>
-        <td>{Number(promocao.discountInPercent).toFixed(2)} %</td>
+        <th scope="row">{promocao.tags.map(tag => <Badge key={`badge-tag-${tag}`} color="info" className="mx-1">{tag}</Badge>)}</th>
+        <td>{getDesconto(promocao)}</td>
         <td>{promocao.undefinedTime ? 'Sim' : 'Não'}</td>
         <td>{new Date(promocao.startDate).toLocaleDateString()} {new Date(promocao.startDate).toLocaleTimeString()}</td>
         <td>{new Date(promocao.endDate).toLocaleDateString()} {new Date(promocao.endDate).toLocaleTimeString()}</td>
@@ -124,8 +126,8 @@ export default () => {
         <Table striped bordered size="sm">
           <thead className="thead-light">
             <tr>
-              <th>Tags</th>
-              <th>Percentual</th>
+              <th>Aplicado em</th>
+              <th>Desconto</th>
               <th>Tempo indefido?</th>
               <th>Início</th>
               <th>Final</th>
