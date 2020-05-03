@@ -59,7 +59,7 @@ export const insertProduto = obj => async () => {
 export const updateProduto = obj => async () => {
     const http = new FetchUtil()
 
-    const { _id, market, ...payload } = obj
+    const { _id, market, images, ...payload } = obj
 
     const response = await http.put(`api/v1/products/${_id}`, payload)
 
@@ -98,6 +98,50 @@ export const searchTags = () => async dispatch => {
 
     const obj = await response.json()
     return dispatch({ type: "@produtos/fetch_tags", payload: obj.data })
+}
+
+export const saveProductImage = (formData, productId = null) => async () => {
+  const http = new FetchUtil();
+
+  let response = null;
+
+  if (productId) {
+    response = await http.put(
+      `api/v1/products/images/${productId}`,
+      formData, 
+      true,
+    )
+  } else {
+    response = await http.post(
+      `api/v1/products/images`, 
+      formData, 
+      true,
+    );
+  }
+
+  if (!response.ok) {
+    alert('Não foi possível salvar a imagem');
+    return;
+  }
+
+  return response.json()  
+}
+
+export const removeProductImage = (imageURL, productId) => async () => {
+  const http = new FetchUtil();
+
+  const removeProductPayload = {
+    imageUrl: imageURL,
+  };
+
+  const response = await http.put(`api/v1/products/images/remove/${productId}`, removeProductPayload);
+
+  if (!response.ok) {
+    alert('Não foi possível remover a imagem');
+    return;
+  }
+
+  return response.json()  
 }
 
 export const createTag = name => async dispatch => dispatch({ type: "@produtos/create_tag", payload: name })

@@ -6,11 +6,12 @@ export class FetchUtil {
     baseURL = process.env.REACT_APP_API_URL;
     headers = new Headers();
 
-    getRequestAtual(url, method, body) {
+    getRequestAtual(url, method, body, isFormData = false) {
         if (this.authorized && !this.headers.has("Authorization")) {
             this.headers.set("Authorization", `Bearer ${CookieManager.get("Authorization")}`);
         }
-        if (!this.headers.has("Content-Type")) {
+
+        if (!isFormData && !this.headers.has("Content-Type")) {
             this.headers.set("Content-Type", 'application/json');
         }
 
@@ -18,17 +19,22 @@ export class FetchUtil {
 
         return new Request(`${this.baseURL}/${url}`, {
             method,
-            body: JSON.stringify(body),
+            body: isFormData ? body :JSON.stringify(body),
             headers
         })
     }
 
-    async post(url, body) {
-        let response = await fetch(this.getRequestAtual(url, 'POST', body));
+    async post(url, body, isFormData = false) {
+
+        let response = await fetch(this.getRequestAtual(url, 'POST', body, isFormData));
 
         this.tratarResponse(response)
 
         return response;
+    }
+
+    setHeader(headerName, headerValue) {
+      this.headers.set(headerName, headerValue);
     }
 
     tratarResponse(response) {
@@ -43,8 +49,8 @@ export class FetchUtil {
         }
     }
 
-    async put(url, body) {
-        let response = await fetch(this.getRequestAtual(url, 'PUT', body));
+    async put(url, body, isFormData = false) {
+        let response = await fetch(this.getRequestAtual(url, 'PUT', body, isFormData));
 
         this.tratarResponse(response);
 
