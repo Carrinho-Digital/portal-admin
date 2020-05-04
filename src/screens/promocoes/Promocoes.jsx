@@ -43,10 +43,19 @@ export default () => {
     }
   }
 
+  const getAplicadoEm = promocao => {
+    const { product } = promocao
+
+    if (product) {
+      return <Link target="blank" to={`/produtos/editar/${product._id}`}>{product.name}</Link>
+    }
+    return promocao.tags.map(tag => <Badge key={`badge-tag-${tag}`} color="info" className="mx-1">{tag}</Badge>)
+  }
+
   const renderPromocoes = () =>
     data.map((promocao) => (
       <tr key={`promocao-${promocao._id}`}>
-        <th scope="row">{promocao.tags.map(tag => <Badge key={`badge-tag-${tag}`} color="info" className="mx-1">{tag}</Badge>)}</th>
+        <th scope="row">{getAplicadoEm(promocao)}</th>
         <td>{getDesconto(promocao)}</td>
         <td>{promocao.undefinedTime ? 'Sim' : 'Não'}</td>
         <td>{new Date(promocao.startDate).toLocaleDateString()} {new Date(promocao.startDate).toLocaleTimeString()}</td>
