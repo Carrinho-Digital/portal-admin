@@ -21,15 +21,15 @@ const NavbarComponent = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/">Início</NavLink>
-            </NavItem>
-
-            <NavItem>
               <NavLink tag={Link} to="/vendas">Vendas</NavLink>
             </NavItem>
 
             <NavItem>
               <NavLink tag={Link} to="/produtos">Produtos</NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink tag={Link} to="/promocoes">Promoções</NavLink>
             </NavItem>
             
             {/* <UncontrolledDropdown nav inNavbar>
