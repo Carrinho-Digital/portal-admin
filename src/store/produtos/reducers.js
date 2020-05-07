@@ -5,6 +5,12 @@ const INITIAL_STATE = {
         page: 0,
         totalPages: 0
     },
+    promotionsOfProduct:{
+        data: [],
+        itemsPerPage: 0,
+        page: 0,
+        totalPages: 0
+    },
     produtoAtual: null,
     tags:[]
 }
@@ -13,6 +19,8 @@ export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case "@produtos/fetch":
             return { ...state, response: action.payload }
+        case "@produtos/fetch_promotions_of_product":
+            return { ...state, promotionsOfProduct: action.payload }
         case "@produtos/fetch_product":            
             return { ...state, produtoAtual: action.payload }
         case "@produtos/fetch_tags":            

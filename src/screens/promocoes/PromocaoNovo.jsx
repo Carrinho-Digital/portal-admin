@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, useParams } from 'react-router-dom';
 
 import PromocaoForm from './PromocaoForm';
 import { insertPromocao } from '../../store/promocoes/actions';
@@ -10,13 +10,23 @@ import { filtrarPorPeriodosDeAnalise, PeriodoAnaliseTypes, toDateTimeLocal } fro
 const PromocaoNovo = () => {
     const dispatch = useDispatch()
     const history = useHistory()
+    const { productId } = useParams()
 
     const handleSubmit = async e => {
         await dispatch(insertPromocao(e))
-        history.push("/promocoes")
+        history.goBack()
     }
 
     const [startDate, endDate] = filtrarPorPeriodosDeAnalise(PeriodoAnaliseTypes.Hoje)
+
+    const initialValues = {
+        tags: [],
+        undefinedTime: false,
+        startDate: toDateTimeLocal(startDate),
+        endDate: toDateTimeLocal(endDate),
+        productId,
+        promotionPerProduct : productId != undefined
+    }
 
     return <Container>
         <Row>
@@ -33,7 +43,7 @@ const PromocaoNovo = () => {
         </Row>
         <Card>
             <CardBody>
-                <PromocaoForm initialValues={{tags:[], undefinedTime:false, startDate: toDateTimeLocal(startDate), endDate: toDateTimeLocal(endDate)}} onSubmit={handleSubmit} />
+                <PromocaoForm initialValues={initialValues} onSubmit={handleSubmit} />
             </CardBody>
         </Card>
 

@@ -11,6 +11,7 @@ import {
 } from '../../store/produtos/actions'
 import ProdutoForm from './ProdutoForm'
 import ProdutoImageUpload from './ProdutoImageUpload'
+import ProdutoListaPromocoes from './ProdutoListaPromocoes'
 
 const ProdutoAlterar = () => {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const ProdutoAlterar = () => {
 
   const handleSubmit = async (e) => {
     await dispatch(updateProduto(e))
-    history.push('/produtos')
+    history.goBack()
   }
 
   if (!produtoAtual) {
@@ -64,11 +65,18 @@ const ProdutoAlterar = () => {
         </Col>
       </Row>
 
-      <ProdutoImageUpload
-        currentImages={normalizeImages(produtoAtual.images)}
-        onSave={handleOnProductImageSaved}
-        onRemove={handleOnProductImageRemove}
-      />
+      <Row>
+        <Col>
+          <ProdutoImageUpload
+            currentImages={normalizeImages(produtoAtual.images)}
+            onSave={handleOnProductImageSaved}
+            onRemove={handleOnProductImageRemove}
+          />
+        </Col>
+        <Col>
+          <ProdutoListaPromocoes id={id}/>
+        </Col>
+      </Row>
       <ProdutoForm initialValues={produtoAtual} onSubmit={handleSubmit} />
     </Container>
   )
