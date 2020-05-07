@@ -52,14 +52,22 @@ export default () => {
     return promocao.tags.map(tag => <Badge key={`badge-tag-${tag}`} color="info" className="mx-1">{tag}</Badge>)
   }
 
+  const getDateAndTime = strDate => {
+    if (!strDate) {
+      return '--'
+    }
+    const date = new Date(strDate)
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+  }
+
   const renderPromocoes = () =>
     data.map((promocao) => (
       <tr key={`promocao-${promocao._id}`}>
         <th scope="row">{getAplicadoEm(promocao)}</th>
         <td>{getDesconto(promocao)}</td>
         <td>{promocao.undefinedTime ? 'Sim' : 'Não'}</td>
-        <td>{new Date(promocao.startDate).toLocaleDateString()} {new Date(promocao.startDate).toLocaleTimeString()}</td>
-        <td>{new Date(promocao.endDate).toLocaleDateString()} {new Date(promocao.endDate).toLocaleTimeString()}</td>
+        <td>{getDateAndTime(promocao.startDate)}</td>
+        <td>{getDateAndTime(promocao.endDate)}</td>
         <td className="d-flex justify-content-end">
           <Button
             className="mr-2"
