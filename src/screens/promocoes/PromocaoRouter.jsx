@@ -9,6 +9,9 @@ export default () => {
     const match = useRouteMatch()
 
     return <Switch>
+        <Route path={`${match.path}/novo/:productId`}>
+            <PromocaoNovo />
+        </Route>
         <Route path={`${match.path}/novo`}>
             <PromocaoNovo />
         </Route>

@@ -13,6 +13,18 @@ export const fetchProdutos = (query) => async dispatch => {
     })
 }
 
+export const fetchPromocoesByProdutoId = _id => async dispatch => {
+  const http = new FetchUtil()
+
+  const response = await http.get(`api/v1/promotions?page=0&limit=5&filterBy=product,${_id}`)
+  const payload = await response.json()
+
+  return dispatch({
+      type: "@produtos/fetch_promotions_of_product",
+      payload
+  })
+}
+
 export const getProdutoById = _id => async dispatch => {
 
     const http = new FetchUtil()

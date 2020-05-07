@@ -19,7 +19,7 @@ const PromocaoAlterar = () => {
 
     const handleSubmit = async e => {
         await dispatch(updatePromocao(e))
-        history.push("/promocoes")
+        history.goBack()
     }
 
     if (!promocaoAtual) {

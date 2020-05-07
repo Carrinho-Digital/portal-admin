@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, Link, useParams } from 'react-router-dom'
 
 import ProdutoForm from './ProdutoForm'
 import { insertProduto } from '../../store/produtos/actions'
@@ -21,7 +21,7 @@ const ProdutoNovo = () => {
 
   const handleSubmit = async (e) => {
     await dispatch(insertProduto(e))
-    history.push('/produtos')
+    history.goBack()
   }
 
   const handleOnProductImageSaved = async (formData) => {
