@@ -36,7 +36,18 @@ export const getProdutoById = _id => async dispatch => {
         return
     }
 
-    const { createdAt, updatedAt, __v, market, ...payload } = await response.json()
+    const productPayload = await response.json();
+
+    if (!productPayload) {
+      dispatch({
+          type: "@produtos/fetch_product",
+          payload: null
+      })
+
+      return null;
+    }
+
+    const { createdAt, updatedAt, __v, market, ...payload } = productPayload
 
     return dispatch({
         type: "@produtos/fetch_product",
