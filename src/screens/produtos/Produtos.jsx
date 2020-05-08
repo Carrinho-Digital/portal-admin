@@ -1,7 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory, useRouteMatch } from 'react-router-dom'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import {
   Button,
   Col,
@@ -10,35 +10,34 @@ import {
   PaginationItem,
   PaginationLink,
   Row,
-  Table,
   BreadcrumbItem,
   Breadcrumb,
-} from 'reactstrap'
+} from "reactstrap";
 
 import {
   deleteProduto,
   fetchProdutos,
   changeInactive,
-} from '../../store/produtos/actions'
+} from "../../store/produtos/actions";
 
 export default () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const routeMatch = useRouteMatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const routeMatch = useRouteMatch();
   const { data, currentPage, totalPages, itemsPerPage } = useSelector(
-    (state) => state.produtos.response,
-  )
+    (state) => state.produtos.response
+  );
 
   const getParams = () => {
-    const { search } = history.location
-    return new URLSearchParams(search)
-  }
+    const { search } = history.location;
+    return new URLSearchParams(search);
+  };
 
   const updateFilter = () => {
-    dispatch(fetchProdutos(getParams().toString()))
-  }
+    dispatch(fetchProdutos(getParams().toString()));
+  };
 
-  React.useEffect(updateFilter, [])
+  React.useEffect(updateFilter, []);
 
   const renderCardProducts = () =>
     data.map((product) => (
@@ -51,7 +50,7 @@ export default () => {
                   src={
                     product.images.length > 0
                       ? product.images[0]
-                      : 'http://via.placeholder.com/190x190'
+                      : "http://via.placeholder.com/190x190"
                   }
                   width="190"
                   alt={product.name}
@@ -63,8 +62,8 @@ export default () => {
                     <div>
                       <h5 className="card-title">{product.name}</h5>
                       <h6 className="card-subtitle text-muted">
-                        R$ {Number(product.sellPrice).toFixed(2)}{' '}
-                        {product.unit ? product.unit.toUpperCase() : ' '}
+                        R$ {Number(product.sellPrice).toFixed(2)}{" "}
+                        {product.unit ? product.unit.toUpperCase() : " "}
                       </h6>
                       <small className="font-weight-bold">{product.sku}</small>
                     </div>
@@ -82,7 +81,7 @@ export default () => {
                         <span className="text-muted">
                           {product.buyPrice
                             ? `R$ ${Number(product.buyPrice).toFixed(2)}`
-                            : '--'}
+                            : "--"}
                         </span>
                       </p>
                     </div>
@@ -94,9 +93,9 @@ export default () => {
                           value={product.inactive}
                           onChange={async () => {
                             await dispatch(
-                              changeInactive(product._id, !product.inactive),
-                            )
-                            updateFilter()
+                              changeInactive(product._id, !product.inactive)
+                            );
+                            updateFilter();
                           }}
                         >
                           <option value={true}>Sim</option>
@@ -132,12 +131,12 @@ export default () => {
                     tag={Link}
                     onClick={async () => {
                       if (
-                        !window.confirm('Tem certeza de que deseja deletar?')
+                        !window.confirm("Tem certeza de que deseja deletar?")
                       ) {
-                        return
+                        return;
                       }
-                      await dispatch(deleteProduto(product._id))
-                      updateFilter()
+                      await dispatch(deleteProduto(product._id));
+                      updateFilter();
                     }}
                   >
                     <FontAwesomeIcon icon="trash" />
@@ -148,22 +147,22 @@ export default () => {
           </div>
         </Col>
       </>
-    ))
+    ));
 
   const paginate = (page) => {
-    const newParams = getParams()
-    if (newParams.has('page')) {
-      newParams.delete('page')
+    const newParams = getParams();
+    if (newParams.has("page")) {
+      newParams.delete("page");
     }
 
-    newParams.append('page', page)
+    newParams.append("page", page);
 
-    history.push({ pathname: routeMatch.path, search: newParams.toString() })
-    updateFilter()
-  }
+    history.push({ pathname: routeMatch.path, search: newParams.toString() });
+    updateFilter();
+  };
 
   const renderPaginationItems = () => {
-    const items = new Array(totalPages).fill(0)
+    const items = new Array(totalPages).fill(0);
 
     return items.map((_, index) => (
       <PaginationItem
@@ -174,8 +173,8 @@ export default () => {
           {index + 1}
         </PaginationLink>
       </PaginationItem>
-    ))
-  }
+    ));
+  };
 
   return (
     <Container>
@@ -259,5 +258,5 @@ export default () => {
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};
