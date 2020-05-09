@@ -126,7 +126,7 @@ export default () => {
         active={currentPage === index}
         key={`pagination-item-${index}`}
       >
-        <PaginationLink onClick={() => paginate(index)} to="#">
+        <PaginationLink tag={Link} onClick={() => paginate(index)} to="#">
           {index + 1}
         </PaginationLink>
       </PaginationItem>
@@ -171,6 +171,7 @@ export default () => {
           <Pagination>
             <PaginationItem>
               <PaginationLink
+                tag={Link}
                 disabled={currentPage <= 0}
                 first
                 onClick={() => paginate(0)}
@@ -179,6 +180,7 @@ export default () => {
             </PaginationItem>
             <PaginationItem disabled={currentPage <= 0}>
               <PaginationLink
+                tag={Link}
                 previous
                 onClick={() => paginate(currentPage - 1)}
                 to="#"
@@ -187,6 +189,7 @@ export default () => {
             {renderPaginationItems()}
             <PaginationItem>
               <PaginationLink
+                tag={Link}
                 disabled={currentPage >= totalPages - 1}
                 next
                 onClick={() => paginate(currentPage + 1)}
@@ -195,6 +198,7 @@ export default () => {
             </PaginationItem>
             <PaginationItem>
               <PaginationLink
+                tag={Link}
                 disabled={currentPage >= totalPages - 1}
                 last
                 onClick={() => paginate(totalPages - 1)}

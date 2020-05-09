@@ -15,7 +15,7 @@ const NavbarComponent = (props) => {
     history.replace("/login")
   }
 
-  return <Navbar className="shadow-sm" fixed="top" color="white" light expand="md">
+  return <Navbar className="shadow-sm" fixed="top" color="dark" dark expand="md">
         <NavbarBrand href="/">Carrinho digital</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

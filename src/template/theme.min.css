@@ -236,7 +236,7 @@ label {
 }
 
 button {
-  border-radius: 0
+  border-radius: 5px
 }
 
 button:focus {
@@ -1863,8 +1863,8 @@ pre code {
 }
 
 .table .thead-light th {
-  color: #495057;
-  background-color: #abb6c2;
+  color: #ffffff;
+  background-color: #1f2e3cdb;
   border-color: rgba(0, 0, 0, .15)
 }
 
@@ -1967,7 +1967,7 @@ pre code {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid transparent;
-  border-radius: 0;
+  border-radius: 5px;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
@@ -2058,7 +2058,7 @@ select.form-control:focus::-ms-value {
   padding: .25rem .5rem;
   font-size: .875rem;
   line-height: 1.5;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .form-control-lg {
@@ -2066,7 +2066,7 @@ select.form-control:focus::-ms-value {
   padding: .5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
-  border-radius: 0
+  border-radius: 5px
 }
 
 select.form-control[multiple],
@@ -2154,7 +2154,7 @@ textarea.form-control {
   line-height: 1.5;
   color: #fff;
   background-color: rgba(92, 184, 92, .9);
-  border-radius: 0
+  border-radius: 5px
 }
 
 .form-control.is-valid,
@@ -2296,7 +2296,7 @@ textarea.form-control.is-valid {
   line-height: 1.5;
   color: #fff;
   background-color: rgba(217, 83, 79, .9);
-  border-radius: 0
+  border-radius: 5px
 }
 
 .form-control.is-invalid,
@@ -2497,7 +2497,7 @@ textarea.form-control.is-invalid {
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0;
+  border-radius: 5px;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
@@ -3148,7 +3148,7 @@ fieldset:disabled a.btn {
   padding: .5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .btn-group-sm>.btn,
@@ -3156,7 +3156,7 @@ fieldset:disabled a.btn {
   padding: .25rem .5rem;
   font-size: .875rem;
   line-height: 1.5;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .btn-block {
@@ -3248,12 +3248,12 @@ input[type=submit].btn-block {
   background-color: #4e5d6c;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, .15);
-  border-radius: 0
+  border-radius: 5px
 }
 
 .dropdown-menu-left {
   right: auto;
-  left: 0
+  left: 5px
 }
 
 .dropdown-menu-right {
@@ -3705,7 +3705,7 @@ input[type=submit].btn-block {
   white-space: nowrap;
   background-color: #4e5d6c;
   border: 1px solid transparent;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .input-group-text input[type=checkbox],
@@ -3727,7 +3727,7 @@ input[type=submit].btn-block {
   padding: .5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .input-group-sm>.custom-select,
@@ -3744,7 +3744,7 @@ input[type=submit].btn-block {
   padding: .25rem .5rem;
   font-size: .875rem;
   line-height: 1.5;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .input-group-lg>.custom-select,
@@ -3849,7 +3849,7 @@ input[type=submit].btn-block {
 }
 
 .custom-checkbox .custom-control-label::before {
-  border-radius: 0
+  border-radius: 5px
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::after {
@@ -3934,7 +3934,7 @@ input[type=submit].btn-block {
   background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px;
   background-color: #fff;
   border: 1px solid transparent;
-  border-radius: 0;
+  border-radius: 5px;
   appearance: none
 }
 
@@ -4028,7 +4028,7 @@ input[type=submit].btn-block {
   color: #495057;
   background-color: #fff;
   border: 1px solid #4e5d6c;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .custom-file-label::after {
@@ -4045,7 +4045,7 @@ input[type=submit].btn-block {
   content: "Browse";
   background-color: #4e5d6c;
   border-left: inherit;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .custom-range {
@@ -4279,7 +4279,7 @@ input[type=submit].btn-block {
 }
 
 .nav-pills .nav-link {
-  border-radius: 0
+  border-radius: 5px
 }
 
 .nav-pills .nav-link.active,
@@ -4375,7 +4375,7 @@ input[type=submit].btn-block {
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .navbar-toggler:focus,
@@ -4711,10 +4711,10 @@ input[type=submit].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #4e5d6c;
+  background-color: #2c3d4b;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, .125);
-  border-radius: 0
+  border: 1px solid #df691a !important;
+  border-radius: 5px
 }
 
 .card>hr {
@@ -4925,12 +4925,12 @@ input[type=submit].btn-block {
 }
 
 .accordion>.card:not(:first-of-type) .card-header:first-child {
-  border-radius: 0
+  border-radius: 5px
 }
 
 .accordion>.card:not(:first-of-type):not(:last-of-type) {
   border-bottom: 0;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .accordion>.card:first-of-type {
@@ -4954,8 +4954,8 @@ input[type=submit].btn-block {
   padding: .75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #4e5d6c;
-  border-radius: 0
+  background-color: #334454;
+  border-radius: 5px
 }
 
 .breadcrumb-item+.breadcrumb-item {
@@ -4985,7 +4985,7 @@ input[type=submit].btn-block {
   display: flex;
   padding-left: 0;
   list-style: none;
-  border-radius: 0
+  border-radius: 5px;
 }
 
 .page-link {
@@ -4996,7 +4996,8 @@ input[type=submit].btn-block {
   line-height: 1.25;
   color: #fff;
   background-color: #4e5d6c;
-  border: 1px solid transparent
+  border: 1px solid #df691a;
+  border-radius: 5px;
 }
 
 .page-link:hover {
@@ -5015,20 +5016,18 @@ input[type=submit].btn-block {
 
 .page-item:first-child .page-link {
   margin-left: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0
+  border-radius: 5px;
 }
 
 .page-item:last-child .page-link {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0
+  border-radius: 5px;
 }
 
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
   background-color: #df691a;
-  border-color: #df691a
+  border-color: #df691a;
 }
 
 .page-item.disabled .page-link {
@@ -5042,33 +5041,31 @@ input[type=submit].btn-block {
 .pagination-lg .page-link {
   padding: .75rem 1.5rem;
   font-size: 1.25rem;
-  line-height: 1.5
+  line-height: 1.5;
+  border-radius: 5px;
 }
 
 .pagination-lg .page-item:first-child .page-link {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0
+  border-radius: 5px;
 }
 
 .pagination-lg .page-item:last-child .page-link {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0
+  border-radius: 5px;
 }
 
 .pagination-sm .page-link {
+  border-radius: 5px;
   padding: .25rem .5rem;
   font-size: .875rem;
   line-height: 1.5
 }
 
 .pagination-sm .page-item:first-child .page-link {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0
+  border-radius: 5px;
 }
 
 .pagination-sm .page-item:last-child .page-link {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0
+  border-radius: 5px;
 }
 
 .badge {
@@ -5080,7 +5077,7 @@ input[type=submit].btn-block {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 0;
+  border-radius: 5px;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
@@ -5250,7 +5247,7 @@ a.badge-dark:focus {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
   background-color: #4e5d6c;
-  border-radius: 0
+  border-radius: 5px
 }
 
 @media (min-width:576px) {
@@ -5262,7 +5259,7 @@ a.badge-dark:focus {
 .jumbotron-fluid {
   padding-right: 0;
   padding-left: 0;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .alert {
@@ -5270,7 +5267,7 @@ a.badge-dark:focus {
   padding: .75rem 1.25rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .alert-heading {
@@ -5421,7 +5418,7 @@ a.badge-dark:focus {
   overflow: hidden;
   font-size: .75rem;
   background-color: #4e5d6c;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .progress-bar {
@@ -5970,7 +5967,7 @@ a.close.disabled {
   background-color: #4e5d6c;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, .2);
-  border-radius: 0;
+  border-radius: 5px;
   outline: 0
 }
 
@@ -6205,7 +6202,7 @@ a.close.disabled {
   color: #fff;
   text-align: center;
   background-color: #000;
-  border-radius: 0
+  border-radius: 5px
 }
 
 .popover {
@@ -6234,7 +6231,7 @@ a.close.disabled {
   background-color: #4e5d6c;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, .2);
-  border-radius: 0
+  border-radius: 5px
 }
 
 .popover .arrow {
@@ -6812,7 +6809,7 @@ button.bg-dark:hover {
 }
 
 .border-light {
-  border-color: #abb6c2 !important
+  border-color: #df691a !important
 }
 
 .border-dark {
@@ -6824,11 +6821,11 @@ button.bg-dark:hover {
 }
 
 .rounded-sm {
-  border-radius: 0 !important
+  border-radius: 5px !important
 }
 
 .rounded {
-  border-radius: 0 !important
+  border-radius: 5px !important
 }
 
 .rounded-top {
@@ -6852,7 +6849,7 @@ button.bg-dark:hover {
 }
 
 .rounded-lg {
-  border-radius: 0 !important
+  border-radius: 5px !important
 }
 
 .rounded-circle {
@@ -6864,7 +6861,7 @@ button.bg-dark:hover {
 }
 
 .rounded-0 {
-  border-radius: 0 !important
+  border-radius: 5px !important
 }
 
 .clearfix::after {
