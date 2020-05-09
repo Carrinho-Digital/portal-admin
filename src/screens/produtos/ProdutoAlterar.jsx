@@ -1,32 +1,40 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams, Link } from 'react-router-dom'
-import { Col, Container, Row, BreadcrumbItem, Breadcrumb } from 'reactstrap'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams, Link } from "react-router-dom";
+import { Col, Container, Row, BreadcrumbItem, Breadcrumb } from "reactstrap";
 
 import {
   getProdutoById,
   updateProduto,
   removeProductImage,
   saveProductImage,
-} from '../../store/produtos/actions'
-import ProdutoForm from './ProdutoForm'
-import ProdutoImageUpload from './ProdutoImageUpload'
-import ProdutoListaPromocoes from './ProdutoListaPromocoes'
+} from "../../store/produtos/actions";
+import ProdutoForm from "./ProdutoForm";
+import ProdutoImageUpload from "./ProdutoImageUpload";
+import ProdutoListaPromocoes from "./ProdutoListaPromocoes";
 
 const ProdutoAlterar = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const { id } = useParams()
-  const produtoAtual = useSelector((state) => state.produtos.produtoAtual)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { id } = useParams();
+  const produtoAtual = useSelector((state) => state.produtos.produtoAtual);
 
   React.useEffect(() => {
-    dispatch(getProdutoById(id))
-  }, [id])
+    const getProductToEdit = async () => {
+      const productExists = await dispatch(getProdutoById(id));
+
+      if (!productExists) {
+        history.push("/produtos");
+      }
+    };
+
+    getProductToEdit();
+  }, [id, dispatch, history]);
 
   const handleSubmit = async (e) => {
-    await dispatch(updateProduto(e))
-    history.goBack()
-  }
+    await dispatch(updateProduto(e));
+    history.goBack();
+  };
 
   if (!produtoAtual) {
     return (
@@ -37,20 +45,20 @@ const ProdutoAlterar = () => {
           </Col>
         </Row>
       </Container>
-    )
+    );
   }
 
   const handleOnProductImageSaved = async (formData) => {
-    await dispatch(saveProductImage(formData, produtoAtual._id))
-  }
+    await dispatch(saveProductImage(formData, produtoAtual._id));
+  };
 
   const handleOnProductImageRemove = async ({ preview }) => {
-    await dispatch(removeProductImage(preview, produtoAtual._id))
-  }
+    await dispatch(removeProductImage(preview, produtoAtual._id));
+  };
 
   const normalizeImages = (images = []) => {
-    return images.map((image) => ({ preview: image, file: null }))
-  }
+    return images.map((image) => ({ preview: image, file: null }));
+  };
 
   return (
     <Container>
@@ -74,12 +82,12 @@ const ProdutoAlterar = () => {
           />
         </Col>
         <Col>
-          <ProdutoListaPromocoes id={id}/>
+          <ProdutoListaPromocoes id={id} />
         </Col>
       </Row>
       <ProdutoForm initialValues={produtoAtual} onSubmit={handleSubmit} />
     </Container>
-  )
-}
+  );
+};
 
-export default ProdutoAlterar
+export default ProdutoAlterar;
