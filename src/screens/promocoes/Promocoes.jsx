@@ -156,7 +156,7 @@ export default () => {
               <tr>
                 <th>Aplicado em</th>
                 <th>Desconto</th>
-                <th>Tempo indefido?</th>
+                <th>Tempo indefinido</th>
                 <th>Início</th>
                 <th>Final</th>
                 <th />
