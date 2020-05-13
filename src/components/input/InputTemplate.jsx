@@ -50,8 +50,8 @@ export function getFieldMask(mask, decimalPlaces = 0) {
       });
     case "cnpj":
       return createTextMask({
-        pattern: "99.999.999.9999-99"
-      });
+        pattern: "99.999.999/9999-99"
+      }); 
     case "decimal":
       return createNumberMask({
         decimalPlaces

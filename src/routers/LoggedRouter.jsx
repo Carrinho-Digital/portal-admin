@@ -5,6 +5,7 @@ import { Container, Row } from 'reactstrap';
 import PrivateRoute from '../components/auth/PrivateRoute';
 import Navbar from '../components/Navbar';
 import ProdutosRouter from '../screens/produtos/ProdutosRouter';
+import PerfilRouter from '../screens/perfil/PerfilRouter';
 import PromocoesRouter from '../screens/promocoes/PromocaoRouter';
 import Vendas from '../screens/vendas/Vendas';
 
@@ -17,6 +18,9 @@ export default function App() {
       <Switch>
         <PrivateRoute path="/produtos">
           <ProdutosRouter />
+        </PrivateRoute>
+        <PrivateRoute path="/perfil">
+          <PerfilRouter />
         </PrivateRoute>
         <PrivateRoute path="/promocoes">
           <PromocoesRouter />

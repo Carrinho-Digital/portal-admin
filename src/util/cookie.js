@@ -24,4 +24,14 @@ export default class CookieUtil{
         var expires = "expires="+d.toUTCString();
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
       }
+
+      static getUserInfo(){
+        const json = CookieUtil.get("UserInfo")
+
+        if(!json){
+          return null;
+        }
+
+        return JSON.parse(json).data
+      }
 }
