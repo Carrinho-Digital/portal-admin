@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem, Col, Container, Row } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Col, Container, Row, ListGroupItem, ListGroup } from 'reactstrap';
 
 import { getPerfil, updatePerfil } from '../../store/perfil/actions';
 import PerfilForm from './PerfilForm';
@@ -13,11 +13,11 @@ const PerfilAlterar = () => {
   const [perfil, setPerfil] = useState(null)
 
   React.useEffect(() => {
-    async function init(){
+    async function init() {
       await dispatch(getPerfil())
       setPerfil(CookieUtil.getUserInfo())
     }
-    
+
     init()
   }, []);
 
@@ -37,7 +37,7 @@ const PerfilAlterar = () => {
   }
 
   return (
-    <Container>
+    <>
       <Row>
         <Col xl="12">
           <Breadcrumb>
@@ -48,7 +48,8 @@ const PerfilAlterar = () => {
         </Col>
       </Row>
       <PerfilForm initialValues={perfil} onSubmit={handleSubmit} />
-    </Container>
+    </>
+
   );
 };
 
