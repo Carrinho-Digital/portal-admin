@@ -1,32 +1,55 @@
 import { FetchUtil } from "../../util/fetch"
 
 export const fetchProdutos = (query) => async dispatch => {
-    
+
     const http = new FetchUtil()
 
     const response = await http.get(`api/v1/products?${query}`)
     const payload = await response.json()
 
-    dispatch({
+    return dispatch({
         type: "@produtos/fetch",
         payload
     })
 }
 
+export const fetchPromocoesByProdutoId = _id => async dispatch => {
+  const http = new FetchUtil()
+
+  const response = await http.get(`api/v1/promotions?page=0&limit=5&filterBy=product,${_id}`)
+  const payload = await response.json()
+
+  return dispatch({
+      type: "@produtos/fetch_promotions_of_product",
+      payload
+  })
+}
+
 export const getProdutoById = _id => async dispatch => {
-    
+
     const http = new FetchUtil()
 
-    const response = await http.get(`api/v1/products/${_id}`)
+    const response = await http.get(`api/v1/products/market/${_id}`)
 
     if (!response.ok) {
         alert("Ocorreu um erro ao buscar o produto selecionado")
         return
     }
 
-    const payload = await response.json()
+    const productPayload = await response.json();
 
-    dispatch({
+    if (!productPayload) {
+      dispatch({
+          type: "@produtos/fetch_product",
+          payload: null
+      })
+
+      return null;
+    }
+
+    const { createdAt, updatedAt, __v, market, ...payload } = productPayload
+
+    return dispatch({
         type: "@produtos/fetch_product",
         payload
     })
@@ -34,7 +57,7 @@ export const getProdutoById = _id => async dispatch => {
 
 export const deleteProduto = id => async () => {
     const http = new FetchUtil()
-    await http.delete(`api/v1/products/${id}`)
+    return await http.delete(`api/v1/products/${id}`)
 }
 
 export const insertProduto = obj => async () => {
@@ -57,7 +80,7 @@ export const insertProduto = obj => async () => {
 export const updateProduto = obj => async () => {
     const http = new FetchUtil()
 
-    const { _id, market, ...payload } = obj
+    const { _id, market, images, ...payload } = obj
 
     const response = await http.put(`api/v1/products/${_id}`, payload)
 
@@ -75,11 +98,71 @@ export const updateProduto = obj => async () => {
 }
 
 export const changeInactive = (productId, inactive = false) => async () => {
-  const http = new FetchUtil()
+    const http = new FetchUtil()
 
-  const inactiveBody = {
-    inactive,
+    const inactiveBody = {
+        inactive,
+    };
+
+    return await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
+}
+
+export const searchTags = () => async dispatch => {
+    const http = new FetchUtil()
+
+    const response = await http.get(`api/v1/markets/tags`)
+
+    if (!response.ok) {
+        alert("Ocorreu um erro ao buscar as tags!")
+        return
+    }
+
+    const obj = await response.json()
+    return dispatch({ type: "@produtos/fetch_tags", payload: obj.data })
+}
+
+export const saveProductImage = (formData, productId = null) => async () => {
+  const http = new FetchUtil();
+
+  let response = null;
+
+  if (productId) {
+    response = await http.put(
+      `api/v1/products/images/${productId}`,
+      formData, 
+      true,
+    )
+  } else {
+    response = await http.post(
+      `api/v1/products/images`, 
+      formData, 
+      true,
+    );
+  }
+
+  if (!response.ok) {
+    alert('Não foi possível salvar a imagem');
+    return;
+  }
+
+  return response.json()  
+}
+
+export const removeProductImage = (imageURL, productId) => async () => {
+  const http = new FetchUtil();
+
+  const removeProductPayload = {
+    imageUrl: imageURL,
   };
 
-  await http.patch(`api/v1/products/inactive/${productId}`, inactiveBody);
+  const response = await http.put(`api/v1/products/images/remove/${productId}`, removeProductPayload);
+
+  if (!response.ok) {
+    alert('Não foi possível remover a imagem');
+    return;
+  }
+
+  return response.json()  
 }
+
+export const createTag = name => async dispatch => dispatch({ type: "@produtos/create_tag", payload: name })
