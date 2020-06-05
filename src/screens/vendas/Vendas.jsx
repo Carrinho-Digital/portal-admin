@@ -5,7 +5,7 @@ import socketIOClient from 'socket.io-client'
 import { Container, Row } from 'reactstrap'
 
 const TOPIC = 'checkout_made'
-const API_ENDPOINT = 'http://localhost:8001'
+const API_ENDPOINT = process.env.REACT_APP_WEB_SOCKET_URL
 
 export default () => {
   useEffect(() => {

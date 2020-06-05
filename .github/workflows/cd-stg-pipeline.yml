@@ -33,6 +33,7 @@ jobs:
         run: |
           cat > ./.env <<EOF
           REACT_APP_API_URL=${{ secrets.API_URL }}
+          REACT_APP_WEB_SOCKET_URL=${{ secrets.API_URL }}
           EOF
       - name: Create Build
         run: |
