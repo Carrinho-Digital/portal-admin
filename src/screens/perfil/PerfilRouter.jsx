@@ -3,6 +3,9 @@ import { Route, Switch, useRouteMatch, Link, useHistory } from 'react-router-dom
 import { Col, Container, ListGroup, ListGroupItem, Row } from 'reactstrap';
 
 import PerfilAlterar from './PerfilAlterar';
+import RegraEntregaRouter from './regras-entrega/RegraEntregaRouter'
+import RegraEntregaNovo from './regras-entrega/RegraEntregaNovo';
+import RegraEntregaAlterar from './regras-entrega/RegraEntregaAlterar';
 
 export default () => {
     const match = useRouteMatch()
@@ -29,7 +32,13 @@ export default () => {
                         <PerfilAlterar />
                     </Route>
                     <Route exact path={`${match.path}/regras-entrega`}>
-                        <h1>Regras de entrega</h1>
+                        <RegraEntregaRouter/>
+                    </Route>
+                    <Route exact path={`${match.path}/regras-entrega/novo`}>
+                        <RegraEntregaNovo/>
+                    </Route>
+                    <Route exact path={`${match.path}/regras-entrega/editar/:id`}>
+                        <RegraEntregaAlterar/>
                     </Route>
                     <Route exact path={`${match.path}/disponibilidade-entrega`}>
                         <h1>Disponibilidade de entrega</h1>

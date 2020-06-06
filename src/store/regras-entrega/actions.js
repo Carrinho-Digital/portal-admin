@@ -1,26 +1,26 @@
 import { FetchUtil } from "../../util/fetch"
 
-export const fetchRegrasEntrada = (query) => async dispatch => {
+export const fetchRegrasEntrega = (query) => async dispatch => {
 
     const http = new FetchUtil()
 
-    const response = await http.get(`api/v1/deliveryRules?${query}`)
+    const response = await http.get(`api/v1/markets/rules?${query}`)
     const payload = await response.json()
 
     return dispatch({
-        type: "@regrasEntrada/fetch",
+        type: "@regrasEntrega/fetch",
         payload
     })
 }
 
-export const getRegraEntradaById = _id => async dispatch => {
+export const getRegraEntregaById = _id => async dispatch => {
 
     const http = new FetchUtil()
 
-    const response = await http.get(`api/v1/deliveryRules/market/${_id}`)
+    const response = await http.get(`api/v1/markets/rules/${_id}`)
 
     if (!response.ok) {
-        alert("Ocorreu um erro ao buscar o regra de entrada selecionado")
+        alert("Ocorreu um erro ao buscar o regra de entrega selecionado")
         return
     }
 
@@ -28,7 +28,7 @@ export const getRegraEntradaById = _id => async dispatch => {
 
     if (!deliveryRulePayload) {
       dispatch({
-          type: "@regrasEntrada/fetch_deliveryRule",
+          type: "@regrasEntrega/fetch_deliveryRule",
           payload: null
       })
 
@@ -38,17 +38,17 @@ export const getRegraEntradaById = _id => async dispatch => {
     const { createdAt, updatedAt, __v, market, ...payload } = deliveryRulePayload
 
     return dispatch({
-        type: "@regrasEntrada/fetch_deliveryRule",
+        type: "@regrasEntrega/fetch_deliveryRule",
         payload
     })
 }
 
-export const deleteRegraEntrada = id => async () => {
+export const deleteRegraEntrega = id => async () => {
     const http = new FetchUtil()
     return await http.delete(`api/v1/markets/rules/${id}`)
 }
 
-export const insertRegraEntrada = obj => async () => {
+export const insertRegraEntrega = obj => async () => {
     const http = new FetchUtil()
     const response = await http.post('api/v1/markets/rules', obj)
 
@@ -65,7 +65,7 @@ export const insertRegraEntrada = obj => async () => {
     }
 }
 
-export const updateRegraEntrada = obj => async () => {
+export const updateRegraEntrega = obj => async () => {
     const http = new FetchUtil()
 
     const { _id, market, images, ...payload } = obj

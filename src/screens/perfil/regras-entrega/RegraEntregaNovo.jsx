@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Col, Container, Row } from 'reactstrap';
 
-import { insertRegraEntrega } from '../../store/regras-entrega/actions';
+import { insertRegraEntrega } from '../../../store/regras-entrega/actions';
 import RegraEntregaForm from './RegraEntregaForm';
 
 const RegraEntregaNovo = () => {
@@ -20,7 +20,7 @@ const RegraEntregaNovo = () => {
       <Row>
         <Col xl="12">
           <Breadcrumb>
-            <BreadcrumbItem tag={Link} to="/regras-entrega">
+            <BreadcrumbItem tag={Link} to="perfil/regras-entrega">
               Regras de entrega
             </BreadcrumbItem>
             <BreadcrumbItem>Nova regra de entrada</BreadcrumbItem>

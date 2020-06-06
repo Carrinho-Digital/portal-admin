@@ -16,7 +16,8 @@ import {
   Table,
 } from "reactstrap";
 
-import { deleteRegraEntrega, fetchRegrasEntrega } from "../../store/regrasEntrega/actions";
+import { deleteRegraEntrega, fetchRegrasEntrega } from "../../../store/regras-entrega/actions";
+import { useEffect } from "react";
 
 export default () => {
   const dispatch = useDispatch();
@@ -29,22 +30,30 @@ export default () => {
     return new URLSearchParams(search);
   };
 
+  const updateFilter = () => {
+    dispatch(fetchRegrasEntrega(getParams().toString()));
+  };
+
+  useEffect(() => {
+    updateFilter()
+  }, [])
+
   const renderRegrasEntrega = () =>
     data.map((regraEntrega) => (
       <tr key={`regraEntrega-${regraEntrega._id}`}>
-        <th scope="row">{Number(regraEntrada.distanceInKm).toFixed(2)}</th>
+        <th scope="row">{Number(regraEntrega.distanceInKm).toFixed(2)}</th>
         <td>{regraEntrega.defaultRule ? "Sim" : "Não"}</td>
         <td>{`${Number(regraEntrega.price).toFixed(2)} R$`}</td>
         <td className="d-flex justify-content-end">
-          <Button
+          {/* <Button
             className="mr-2"
             outline
             color="warning"
             tag={Link}
-            to={`/regras-entrega/editar/${regraEntrega._id}`}
+            to={`/perfil/regras-entrega/editar/${regraEntrega._id}`}
           >
             <FontAwesomeIcon icon="pencil-alt" />
-          </Button>
+          </Button> */}
           <Button
             outline
             color="danger"
@@ -95,12 +104,12 @@ export default () => {
       <Row className="mb-2">
         <Col xl="12">
           <Breadcrumb>
-            <BreadcrumbItem>Regras de entrada</BreadcrumbItem>
+            <BreadcrumbItem>Regras de entrega</BreadcrumbItem>
           </Breadcrumb>
         </Col>
         <Col xl="12">
           <div className="d-flex align-self-center justify-content-end">
-            <Button outline color="success" tag={Link} to="/regras-entrada/novo">
+            <Button outline color="success" tag={Link} to="/perfil/regras-entrega/novo">
               Nova regra de entrega <FontAwesomeIcon icon="plus" />
             </Button>
           </div>

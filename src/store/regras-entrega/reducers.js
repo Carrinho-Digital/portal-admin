@@ -5,15 +5,15 @@ const INITIAL_STATE = {
         page: 0,
         totalPages: 0
     },
-    regraEntradaAtual: null
+    regraEntregaAtual: null
 }
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
-        case "@regrasEntrada/fetch":
+        case "@regrasEntrega/fetch":
             return { ...state, response: action.payload }
-        case "@regrasEntrada/fetch_deliveryRule":            
-            return { ...state, regraEntradaAtual: action.payload }
+        case "@regrasEntrega/fetch_deliveryRule":            
+            return { ...state, regraEntregaAtual: action.payload }
         default:
             return state;
     }
