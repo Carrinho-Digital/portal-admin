@@ -3,21 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Col, Container, Row } from 'reactstrap';
 
-import { getRegraEntradaById, updateRegraEntrada } from '../../store/regras-entrada/actions';
-import RegraEntradaForm from './RegraEntradaForm';
+import { getRegraEntregaById, updateRegraEntrega } from '../../../store/regras-entrega/actions';
+import RegraEntregaForm from './RegraEntregaForm';
 
-const RegraEntradaAlterar = () => {
+const RegraEntregaAlterar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  const regraEntradaAtual = useSelector((state) => state.regrasEntrada.regraEntradaAtual);
+  const regraEntregaAtual = useSelector((state) => state.regrasEntrega.regraEntregaAtual);
 
   React.useEffect(() => {
     const getProductToEdit = async () => {
-      const productExists = await dispatch(getRegraEntradaById(id));
+      const productExists = await dispatch(getRegraEntregaById(id));
 
       if (!productExists) {
-        history.push("/regras-entrada");
+        history.push("/regras-entrega");
       }
     };
 
@@ -25,11 +25,11 @@ const RegraEntradaAlterar = () => {
   }, [id, dispatch, history]);
 
   const handleSubmit = async (e) => {
-    await dispatch(updateRegraEntrada(e));
+    await dispatch(updateRegraEntrega(e));
     history.goBack();
   };
 
-  if (!regraEntradaAtual) {
+  if (!regraEntregaAtual) {
     return (
       <Container>
         <Row>
@@ -46,16 +46,16 @@ const RegraEntradaAlterar = () => {
       <Row>
         <Col xl="12">
           <Breadcrumb>
-            <BreadcrumbItem tag={Link} to="/regras-entrada">
+            <BreadcrumbItem tag={Link} to="/regras-entrega">
               Regras de entrega
             </BreadcrumbItem>
             <BreadcrumbItem>Alterar</BreadcrumbItem>
           </Breadcrumb>
         </Col>
       </Row>
-      <RegraEntradaForm initialValues={regraEntradaAtual} onSubmit={handleSubmit} />
+      <RegraEntregaForm initialValues={regraEntregaAtual} onSubmit={handleSubmit} />
     </Container>
   );
 };
 
-export default RegraEntradaAlterar;
+export default RegraEntregaAlterar;

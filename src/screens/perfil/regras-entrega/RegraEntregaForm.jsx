@@ -4,19 +4,15 @@ import { useHistory } from 'react-router-dom';
 import { Button, Col, Form, Row } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 
-import { getFieldMask, renderInput } from '../../components/input/InputTemplate';
-import { searchTags } from '../../store/regraEntradas/actions';
+import { getFieldMask, renderInput } from '../../../components/input/InputTemplate';
+import validate from './validate';
 
-const FORM_NAME = 'regraEntrada'
+const FORM_NAME = 'regraEntrega'
 
-const RegraEntradaForm = (props) => {
+const RegraEntregaForm = (props) => {
   const { handleSubmit } = props
   const history = useHistory()
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(searchTags())
-  }, [])
 
   return (
     <>
@@ -24,7 +20,6 @@ const RegraEntradaForm = (props) => {
         <Row>
           <Col xl="3" sm="12">
             <Field
-              required
               component={renderInput}
               type="text"
               {...getFieldMask("decimal", 2)}
@@ -32,26 +27,24 @@ const RegraEntradaForm = (props) => {
               label="Distância em Km"
               placeholder="Ex: 5 Km"
             />
-          </Col>          
+          </Col>
           <Col xl="3" sm="12">
             <Field
-              required
               component={renderInput}
               type="checkbox"
               name="defaultRule"
               label="Regra de entrega padrão"
             />
-          </Col>          
+          </Col>
           <Col xl="3" sm="12">
             <Field
-              required
               component={renderInput}
               type="text"
               name="price"
               label="Preço da entrega"
               {...getFieldMask("moedaBRL", 2)}
             />
-          </Col>          
+          </Col>
         </Row>
         <Row>
           <Col className="d-flex flex-row-reverse">
@@ -74,4 +67,7 @@ const RegraEntradaForm = (props) => {
   )
 }
 
-export default reduxForm({ form: FORM_NAME })(RegraEntradaForm)
+export default reduxForm({
+  form: FORM_NAME,
+  validate
+})(RegraEntregaForm)

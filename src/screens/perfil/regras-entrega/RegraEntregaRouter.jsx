@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import RegrasEntrada from './RegrasEntrada';
-import RegraEntradaNovo from './RegraEntradaNovo'
-import RegraEntradaAlterar from './RegraEntradaAlterar'
+import RegrasEntrada from './RegrasEntrega';
+import RegraEntradaNovo from './RegraEntregaNovo'
+import RegraEntregaAlterar from './RegraEntregaAlterar'
 
 export default () => {
     const match = useRouteMatch()
@@ -12,9 +12,9 @@ export default () => {
         <Route path={`${match.path}/novo`}>
             <RegraEntradaNovo />
         </Route>
-        <Route exact path={`${match.path}/editar/:id`}>
-            <RegraEntradaAlterar />
-        </Route>
+        {/* <Route exact path={`${match.path}/editar/:id`}>
+            <RegraEntregaAlterar />
+        </Route> */}
         <Route path={match.path}>
             <RegrasEntrada />
         </Route>
