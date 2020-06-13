@@ -45,7 +45,7 @@ export default () => {
         <td>{regraEntrega.defaultRule ? "Sim" : "Não"}</td>
         <td>{`${Number(regraEntrega.price).toFixed(2)} R$`}</td>
         <td className="d-flex justify-content-end">
-          {/* <Button
+          <Button
             className="mr-2"
             outline
             color="warning"
@@ -53,7 +53,7 @@ export default () => {
             to={`/perfil/regras-entrega/editar/${regraEntrega._id}`}
           >
             <FontAwesomeIcon icon="pencil-alt" />
-          </Button> */}
+          </Button>
           <Button
             outline
             color="danger"

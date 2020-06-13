@@ -17,7 +17,7 @@ export const getRegraEntregaById = _id => async dispatch => {
 
     const http = new FetchUtil()
 
-    const response = await http.get(`api/v1/markets/rules/${_id}`)
+    const response = await http.get(`api/v1/markets/rules/get/${_id}`)
 
     if (!response.ok) {
         alert("Ocorreu um erro ao buscar o regra de entrega selecionado")
@@ -35,7 +35,7 @@ export const getRegraEntregaById = _id => async dispatch => {
       return null;
     }
 
-    const { createdAt, updatedAt, __v, market, ...payload } = deliveryRulePayload
+    const { createdAt, updatedAt, __v, market, ...payload } = deliveryRulePayload.data
 
     return dispatch({
         type: "@regrasEntrega/fetch_deliveryRule",
