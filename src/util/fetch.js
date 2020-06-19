@@ -77,7 +77,7 @@ export class FetchUtil {
         let response = await fetch(this.getRequestAtual(url, 'DELETE'));
 
         this.tratarResponse(response);
-
+        debugger
         return response;
     }
 

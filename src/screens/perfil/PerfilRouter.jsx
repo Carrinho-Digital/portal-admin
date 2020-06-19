@@ -3,9 +3,13 @@ import { Route, Switch, useRouteMatch, Link, useHistory } from 'react-router-dom
 import { Col, Container, ListGroup, ListGroupItem, Row } from 'reactstrap';
 
 import PerfilAlterar from './PerfilAlterar';
-import RegraEntregaRouter from './regras-entrega/RegraEntregaRouter'
+import RegrasEntrega from './regras-entrega/RegrasEntrega';
 import RegraEntregaNovo from './regras-entrega/RegraEntregaNovo';
-import RegraEntregaAlterar from './regras-entrega/RegraEntregaAlterar';
+
+import DisponibilidadeEntrega from './disponibilidade-entrega/DisponibilidadeEntrega'
+import DisponibilidadeEntregaNovo from './disponibilidade-entrega/DisponibilidadeEntregaNovo';
+import DisponibilidadeEntregaAlterar from './disponibilidade-entrega/DisponibilidadeEntregaAlterar';
+
 
 export default () => {
     const match = useRouteMatch()
@@ -16,13 +20,13 @@ export default () => {
             <Row>
                 <Col xl="3">
                     <ListGroup>
-                        <ListGroupItem className="text-decoration-none" to={match.path} tag={Link} active={currentPath == match.path}>
+                        <ListGroupItem className="text-decoration-none" to={match.path} tag={Link} active={currentPath === match.path}>
                             Perfil
                         </ListGroupItem>
-                        <ListGroupItem className="text-decoration-none" to={`${match.path}/regras-entrega`} tag={Link} active={currentPath == `${match.path}/regras-entrega`}>
+                        <ListGroupItem className="text-decoration-none" to={`${match.path}/regras-entrega`} tag={Link} active={currentPath === `${match.path}/regras-entrega`}>
                             Regras de entrega
                         </ListGroupItem>
-                        <ListGroupItem className="text-decoration-none" to={`${match.path}/disponibilidade-entrega`} tag={Link} active={currentPath == `${match.path}/disponibilidade-entrega`}>
+                        <ListGroupItem className="text-decoration-none" to={`${match.path}/disponibilidades-entrega`} tag={Link} active={currentPath === `${match.path}/disponibilidades-entrega`}>
                             Disponibilidade de entrega
                         </ListGroupItem>
                     </ListGroup>
@@ -31,17 +35,25 @@ export default () => {
                     <Route exact path={match.path}>
                         <PerfilAlterar />
                     </Route>
+
                     <Route exact path={`${match.path}/regras-entrega`}>
-                        <RegraEntregaRouter/>
+                        <RegrasEntrega />
                     </Route>
                     <Route exact path={`${match.path}/regras-entrega/novo`}>
-                        <RegraEntregaNovo/>
+                        <RegraEntregaNovo />
                     </Route>
-                    <Route exact path={`${match.path}/regras-entrega/editar/:id`}>
+                    {/* <Route exact path={`${match.path}/regras-entrega/editar/:id`}>
                         <RegraEntregaAlterar/>
+                    </Route> */}
+
+                    <Route exact path={`${match.path}/disponibilidades-entrega`}>
+                        <DisponibilidadeEntrega />
                     </Route>
-                    <Route exact path={`${match.path}/disponibilidade-entrega`}>
-                        <h1>Disponibilidade de entrega</h1>
+                    <Route exact path={`${match.path}/disponibilidades-entrega/novo`}>
+                        <DisponibilidadeEntregaNovo />
+                    </Route>
+                    <Route exact path={`${match.path}/disponibilidades-entrega/editar/:id`}>
+                        <DisponibilidadeEntregaAlterar/>
                     </Route>
                 </Col>
             </Row>

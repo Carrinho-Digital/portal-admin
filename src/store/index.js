@@ -6,12 +6,15 @@ import { reducer as formReducer } from 'redux-form'
 import produtos from './produtos/reducers'
 import promocoes from './promocoes/reducers'
 import regrasEntrega from './regras-entrega/reducers'
+import disponibilidadesEntrega from './disponibilidades-entrega/reducers'
+
 
 const reducers = combineReducers({
     produtos,
     promocoes,
     form: formReducer,
-    regrasEntrega
+    regrasEntrega,
+    disponibilidadesEntrega
 })
 
 export default createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
