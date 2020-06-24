@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Col, Container, Row } from 'reactstrap';
-import {format} from 'date-fns'
 
 import { getDisponibilidadeEntregaById, updateDisponibilidadeEntrega, limparForm } from '../../../store/disponibilidades-entrega/actions';
 import DisponibilidadeEntregaForm from './DisponibilidadeEntregaForm';
+import moment from 'moment';
 
 const DisponibilidadeEntregaAlterar = () => {
   const dispatch = useDispatch();
@@ -47,8 +47,8 @@ const DisponibilidadeEntregaAlterar = () => {
   
   debugger
   disponibilidadeEntregaAtual.availabilities = disponibilidadeEntregaAtual.availabilities.map(item => {
-    const from = format(new Date(item.from), 'HH:mm')
-    const to = format(new Date(item.to), 'HH:mm')
+    const from = moment(new Date(item.from)).format('HH:mm')
+    const to = moment(new Date(item.to)).format('HH:mm')
 
     return {
       to,
