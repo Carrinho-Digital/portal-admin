@@ -18,6 +18,23 @@ import DetalhesDelivery from './DetalhesDelivery'
 import DetalhesCliente from './DetalhesCliente'
 import DetalhesPagamento from './DetalhesPagamento'
 
+function formatAndShowDiscount(promotion, product) {
+  if (!promotion) return 'R$ 0.00'
+
+  const discountPriceNumber = Number(promotion.discountInPrice)
+  const discountPercentNumber = Number(promotion.discountInPercent)
+
+  if (isNaN(discountPriceNumber) || isNaN(discountPercentNumber))
+    return 'R$ 0.00'
+
+  if (discountPriceNumber > 0) return `- R$ ${discountPriceNumber.toFixed(2)}`
+  if (discountPercentNumber > 0) {
+    return `${discountPriceNumber.toFixed(2)}%`
+  }
+
+  return 'R$ 0.00'
+}
+
 function Detalhes({ venda }) {
   return (
     <Col>
@@ -49,7 +66,7 @@ function Detalhes({ venda }) {
         </div>
       </div>
       <h3>Produtos</h3>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr className="table-light">
             <th scope="col" className="text-dark">
@@ -61,21 +78,32 @@ function Detalhes({ venda }) {
             <th scope="col" className="text-dark">
               Preço de Venda
             </th>
+            <th scope="col" className="text-dark">
+              Desconto Aplicado
+            </th>
           </tr>
         </thead>
         <tbody>
-          {venda.products.map(({ product, quantity }) => {
+          {venda.products.map(({ product, quantity, promotion }) => {
             return (
-              <tr table-light>
+              <tr key={product._id}>
                 <td>{`${product.name} - ${product.size ? product.size : ''}${
                   product.unit
                 }`}</td>
                 <td>{quantity}</td>
                 <td>R$ {Number(product.sellPrice).toFixed(2)}</td>
+                <td>{formatAndShowDiscount(promotion)}</td>
               </tr>
             )
           })}
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan={2}></td>
+            <td>R$ {Number(venda.price).toFixed(2)}</td>
+            <td>Discounts</td>
+          </tr>
+        </tfoot>
       </table>
     </Col>
   )
