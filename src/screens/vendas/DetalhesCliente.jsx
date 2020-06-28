@@ -5,7 +5,7 @@ import Col from 'reactstrap/lib/Col'
 function DetalhesCliente({ user }) {
   return (
     <>
-      <h4>Cliente</h4>
+      <h5 className="font-weight-bold">Cliente</h5>
       <hr />
       <Row>
         <Col>

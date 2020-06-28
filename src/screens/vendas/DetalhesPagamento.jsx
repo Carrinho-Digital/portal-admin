@@ -8,7 +8,7 @@ function DetalhesPagamento({ payment }) {
 
   return (
     <>
-      <h4>Pagamento</h4>
+      <h5 className="font-weight-bold">Pagamento</h5>
       <hr />
       <Row>
         <Col>

@@ -29,7 +29,7 @@ function formatAndShowDiscount(promotion, product) {
 
   if (discountPriceNumber > 0) return `- R$ ${discountPriceNumber.toFixed(2)}`
   if (discountPercentNumber > 0) {
-    return `${discountPriceNumber.toFixed(2)}%`
+    return `${discountPercentNumber.toFixed(2)} %`
   }
 
   return 'R$ 0.00'
@@ -66,7 +66,7 @@ function Detalhes({ venda }) {
         </div>
       </div>
       <h3>Produtos</h3>
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr className="table-light">
             <th scope="col" className="text-dark">
@@ -75,10 +75,10 @@ function Detalhes({ venda }) {
             <th scope="col" className="text-dark">
               Quantidade
             </th>
-            <th scope="col" className="text-dark">
+            <th scope="col" className="text-dark text-right">
               Preço de Venda
             </th>
-            <th scope="col" className="text-dark">
+            <th scope="col" className="text-dark text-right">
               Desconto Aplicado
             </th>
           </tr>
@@ -91,17 +91,26 @@ function Detalhes({ venda }) {
                   product.unit
                 }`}</td>
                 <td>{quantity}</td>
-                <td>R$ {Number(product.sellPrice).toFixed(2)}</td>
-                <td>{formatAndShowDiscount(promotion)}</td>
+                <td align="right">R$ {Number(product.sellPrice).toFixed(2)}</td>
+                <td align="right">{formatAndShowDiscount(promotion)}</td>
               </tr>
             )
           })}
         </tbody>
         <tfoot>
-          <tr>
+          <tr className="table-primary">
             <td colSpan={2}></td>
-            <td>R$ {Number(venda.price).toFixed(2)}</td>
-            <td>Discounts</td>
+            <td align="right">R$ {Number(venda.price).toFixed(2)}</td>
+            <td align="right">
+              R$ {Number(venda.promotions.totalPromotions).toFixed(2)}
+            </td>
+          </tr>
+          <tr className="table-dark">
+            <td colSpan={3}></td>
+            <td align="right">
+              <strong>Total a pagar</strong> R${' '}
+              {Number(venda.promotions.totalPriceAfterPromotions).toFixed(2)}
+            </td>
           </tr>
         </tfoot>
       </table>

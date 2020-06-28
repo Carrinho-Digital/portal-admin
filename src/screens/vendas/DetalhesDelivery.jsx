@@ -31,10 +31,7 @@ function DetalhesDelivery({ delivery, availability }) {
 
   return (
     <>
-      <h4>
-        Entrega:{' '}
-        <span style={{ fontSize: '1.3rem', fontWeight: 'bold' }}></span>
-      </h4>
+      <h5 className="font-weight-bold">Entrega</h5>
       <hr />
       <Row>
         <Col md="4" sm="12" xl="4">
