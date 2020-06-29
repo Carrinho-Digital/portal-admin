@@ -23,7 +23,7 @@ export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const routeMatch = useRouteMatch();
-  debugger
+  
   const { data, currentPage, totalPages } = useSelector((state) => state.disponibilidadesEntrega.response);
 
   const getParams = () => {

@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const FORM_NAME = 'disponibilidadeEntrega'
 
 const renderAvailabilities = ({fields}) => {
-  // debugger
+  // 
   return <ListGroup className="mb-3">
      {fields.map((name, index) => (
     <ListGroupItem key={`disponibilidade-${index}`}>

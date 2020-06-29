@@ -15,7 +15,7 @@ const DisponibilidadeEntregaAlterar = () => {
 
   React.useEffect(() => {
     const getDisponibilidadeEntregaToEdit = async () => {
-      debugger
+      
       await dispatch(limparForm())
       const disponibilidadeEntregaExists = await dispatch(getDisponibilidadeEntregaById(id));
 
@@ -45,7 +45,7 @@ const DisponibilidadeEntregaAlterar = () => {
   }
 
   
-  debugger
+  
   disponibilidadeEntregaAtual.availabilities = disponibilidadeEntregaAtual.availabilities.map(item => {
     const from = moment(new Date(item.from)).format('HH:mm')
     const to = moment(new Date(item.to)).format('HH:mm')

@@ -1,7 +1,7 @@
 import { FetchUtil } from "../../util/fetch"
 
 export const fetchDisponibilidadesEntrega = (query) => async dispatch => {
-    debugger
+    
     const http = new FetchUtil()
 
     const response = await http.get(`api/v1/markets/availabilities?${query}`)
@@ -54,7 +54,7 @@ const formatDate = (data) => {
 
 export const insertDisponibilidadeEntrega = obj => async dispatch => {
     const http = new FetchUtil()
-    // debugger
+    // 
     obj.availabilities = obj.availabilities.map(item =>({
 
         to: formatDate(item.to),
@@ -83,7 +83,7 @@ export const updateDisponibilidadeEntrega = obj => async dispatch => {
 
     const { _id, market, images, ...payload } = obj
 
-    debugger
+    
     payload.availabilities = payload.availabilities.map(item =>({
 
         to: formatDate(item.to),
@@ -91,7 +91,7 @@ export const updateDisponibilidadeEntrega = obj => async dispatch => {
 
     }))
 
-    // debugger
+    // 
     const response = await http.put(`api/v1/markets/availabilities/${_id}`, payload)
  
 
